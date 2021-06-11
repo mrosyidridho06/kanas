@@ -30,9 +30,9 @@
                         <li class="nav-item"><a class="nav-link" href="<?=base_url()?>/supplier/supplier.php">Supplier</a></li>
                         <li class="nav-item"><a class="nav-link" href="<?=base_url()?>/pegawai/pegawai.php">Pegawai</a></li>
                         <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#" style="color: rgb(34,34,34);">Bahan</a>
-                            <div class="dropdown-menu"><a class="dropdown-item" href="<?=base_url()?>/bahan.php">Bahan Baku</a><a class="dropdown-item" href="<?=base_url()?>/list.php">List Bahan Baku</a></div>
+                            <div class="dropdown-menu"><a class="dropdown-item" href="<?=base_url()?>/bahan/bahan.php">Bahan Baku</a><a class="dropdown-item" href="<?=base_url()?>/bahan/list.php">List Bahan Baku</a></div>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="<?=base_url()?>/hr.php">HR Management</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?=base_url()?>/hr/hr.php">HR Management</a></li>
                     </ul>
                 </div>
             </div>

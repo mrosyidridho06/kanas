@@ -5,22 +5,22 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Kana's Kitchen</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700">
-    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
-    <link rel="stylesheet" href="assets/css/Article-Clean.css">
-    <link rel="stylesheet" href="assets/css/Article-Dual-Column.css">
-    <link rel="stylesheet" href="assets/css/Article-List.css">
-    <link rel="stylesheet" href="assets/css/Contact-Form-Clean.css">
-    <link rel="stylesheet" href="assets/css/Footer-Basic.css">
-    <link rel="stylesheet" href="assets/css/Footer-Clean.css">
-    <link rel="stylesheet" href="assets/css/Header-Blue.css">
-    <link rel="stylesheet" href="assets/css/Map-Clean.css">
-    <link rel="stylesheet" href="assets/css/Navigation-Clean.css">
-    <link rel="stylesheet" href="assets/css/Pretty-Registration-Form.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="./assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="./assets/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="./assets/css/Article-Clean.css">
+    <link rel="stylesheet" href="./assets/css/Article-Dual-Column.css">
+    <link rel="stylesheet" href="./assets/css/Article-List.css">
+    <link rel="stylesheet" href="./assets/css/Contact-Form-Clean.css">
+    <link rel="stylesheet" href="./assets/css/Footer-Basic.css">
+    <link rel="stylesheet" href="./assets/css/Footer-Clean.css">
+    <link rel="stylesheet" href="./assets/css/Header-Blue.css">
+    <link rel="stylesheet" href="./assets/css/Map-Clean.css">
+    <link rel="stylesheet" href="./assets/css/Navigation-Clean.css">
+    <link rel="stylesheet" href="./assets/css/Pretty-Registration-Form.css">
+    <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
 
 <body>
@@ -29,7 +29,7 @@
             <div class="container-fluid"><a class="navbar-brand" href="#"><img src="assets/img/pesanlokal-com-kanaskitchen-logo-aLgOa7-removebg-preview.png" style="height: 54px;">Kana's Kitchen</a><button data-toggle="collapse" class="navbar-toggler btn btn-light" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navcol-1">
                     <ul class="navbar-nav">
-                        <li class="nav-item"><a class="nav-link" href="bahan.php" style="border-color: rgb(34,34,34);color: rgb(34,34,34);">Toko</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./bahan/bahan.php" style="border-color: rgb(34,34,34);color: rgb(34,34,34);">Toko</a></li>
                         <!-- <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#" style="color: rgb(34,34,34);">Dropdown </a>
                             <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
                         </li> -->
