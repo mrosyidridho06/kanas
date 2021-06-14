@@ -11,7 +11,7 @@
 </head>
 
 <body>
-<?php include_once '../navbar.php'?>
+<?php include_once '../sidebar.php'?>
     <section class="contact-clean" style="background: var(--light);">
         <h2 style="text-shadow: 0px 0px 1px var(--blue);text-align: center;">HRD</h2>
         <main>

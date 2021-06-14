@@ -5,6 +5,8 @@ require('../config.php');
 
 //JIKA MENGIRIMKAN DATA DENGAN NAME "SAVE" (TOMBOL SAVE TELAH DI KLIK)
 if(isset($_POST['save'])){
+    mysqli_query($conn, "INSERT INTO tb_bahan VALUES ('', '$_POST[nama_barang]', '$_POST[jumlah_barang]', '$_POST[satuan]', '$_POST[harga_barang]', '$_POST[nama_supplier]')");
+    echo 'berhasil';
     //JIKA DATA ADA YANG KOSONG
     // if(!isset($_POST['nama_barang']) || !isset($_POST['supplier']) || !isset($_POST['jumlah_barang']) || !isset($_POST['satuan']) || !$_POST['harga_barang']){
     //     if($_POST['nama_barang'] == ""){
@@ -24,18 +26,24 @@ if(isset($_POST['save'])){
     //     }
     // }else{
         //SELAIN DATA ADA YANG KOSONG (BERARTI SEMUA FORM TERISI)
-        $nama =$_POST['nama_barang'];
-        $jumlah =$_POST['jumlah_barang'];
-        $satuan =$_POST['satuan'];
-        $harga =$_POST['harga_barang'];
+        // $id='';
+        // $nama =$_POST['nama_barang'];
+        // $supp = $_POST['nama_supplier'];
+        // $jumlah =$_POST['jumlah_barang'];
+        // $satuan =$_POST['satuan'];
+        // $jam = '';
+        // $harga =$_POST['harga_barang'];
 
-        mysqli_query($conn, "INSERT INTO tb_bahan (nama_barang, jumlah_barang, satuan, harga_barang) VALUES('$nama', '$jumlah', '$satuan', '$harga')") or die(mysqli_error($conn));
+        // mysqli_query($conn, "INSERT INTO tb_bahan (id_bahan, nama_barang, jumlah_barang, satuan, harga_barang, waktu, id_supplier ) VALUES ('$id', '$nama', '$jumlah', '$satuan', '$harga', '$jam', '$supp')") or die(mysqli_error($conn));
 
-        $supp = $_POST['supplier'];
-        foreach($supp as $suplier){
-            mysqli_error($conn, "INSERT INTO tb_supplier (id_supplier) VALUES('$suplier')") or die(mysqli_error($conn));
-        }
-        echo "<script>window.location='list.php';</script>";
+
+        // echo 'berhasil';
+
+        // $supp = $_POST['nama_supplier'];
+        // foreach($supp as $suplier){
+        //     mysqli_error($conn, "INSERT INTO tb_supplier (id_supplier, nama_supplier) VALUES('$id','$suplier')") or die(mysqli_error($conn));
+        // }
+        // echo "<script>window.location='list.php';</script>";
         //KONEKSI DATABASE DAN EKSEKUSI QUERY 
         //     echo "<div class=\"alert alert-success\" role=\"alert\">Berhasil disimpan</div>";
         // }else{
@@ -67,7 +75,7 @@ if(isset($_POST['save'])){
     <section class="contact-clean" style="background: var(--light);">
         <main>
             <h2 style="text-shadow: 0px 0px 1px var(--blue);text-align: center;">Bahan Baku</h2>
-            <form class="shadow" action="" method="post">
+            <form class="shadow" action="proses.php" method="post">
                 <h2 class="text-center">Input Bahan Baku</h2><label>Nama Barang</label>
                 <div class="form-group" style="margin: 1px;padding: 0px;padding-bottom: 6px;"><input class="form-control" type="text" name="nama_barang" placeholder="Nama Barang"></div><label>Supplier</label>
                 <div class="form-group" style="margin: 1px;padding: 0px;padding-bottom: 6px;"><select class="form-control" name="supplier" required>

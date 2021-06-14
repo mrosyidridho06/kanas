@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bahan</title>
     <link rel="stylesheet" href="../assets/DataTables/DataTables-1.10.24/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="../assets/DataTables/Button-1.7.0/css/buttons.bootstrap4.min.css">
+    <!-- <link rel="stylesheet" href="../assets/DataTables/Button-1.7.0/css/buttons.bootstrap4.min.css"> -->
     <script src="../assets/DataTables/jQuery-3.3.1/jquery-3.3.1.js"></script>
     <script src="../assets/DataTables/DataTables-1.10.24/js/jquery.dataTables.min.js"></script>
 </head>
@@ -112,7 +112,7 @@
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="<?=base_url()?>/assets/DataTables/Buttons-1.7.0/js/dataTables.buttons.min.js"></script>
+    <!-- <script src="<?=base_url()?>/assets/DataTables/Buttons-1.7.0/js/dataTables.buttons.min.js"></script> -->
     <script src="<?=base_url()?>/assets/DataTables/DataTables-1.10.24/js/jquery.dataTables.min.js"></script>
     <script src="<?=base_url()?>/assets/DataTables/DataTables-1.10.24/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -138,7 +138,7 @@
                     {
                         "searchable" : false,
                         "orderable" : false,
-                        "targets" : 3,
+                        "targets" : 6,
                         "render" : function(data, type, row) {
                             var btn = "<center><a href=\"edit.php?id="+data+"\"class=\"btn btn-warning btn-xs\"><i class=\"fa fa-edit\"></i></a><a href=\"delete.php?id="+data+"\" onclick=\"return confirm('Yakin Mau dihapus')\"class=\"btn btn-danger btn-xs\"><i class=\"fa fa-trash\"></i></a></center>";
                             return btn;

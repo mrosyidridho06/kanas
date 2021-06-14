@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <?php require('../navbar.php')?>
+    <?php require('../sidebar.php')?>
     <section class="contact-clean" style="background: var(--light);">
         <main>
             <h2 style="text-shadow: 0px 0px 1px var(--blue);text-align: center;">Resep Kanas</h2>

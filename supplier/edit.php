@@ -29,29 +29,11 @@ $('#update_form').on("submit", function(event){
  });
 </script>
 <?php 
-if(isset($_POST["supplier_id"]))
+if(isset($_POST["id"]))
 {
  $output = '';
  require_once "../config.php";
  $query = "SELECT * FROM tb_supplier WHERE id = '".$_POST["supplier_id"]."'";
  $result = mysqli_query($conn, $query);
-    $row = mysqli_fetch_array($result);
-     $output .= '
-        <form method="post" id="update_form">
-        <label>Nama Supplier</label>
-        <input type="hidden" name="id_supplier" id="id" value="'.$_POST["id_supplier"].'" class="form-control" />
-        <input type="text" name="nama_supplier" id="enama" value="'.$row['nama_supplier'].'" class="form-control" />
-        <br />
-        <label>Alamat Supplier</label>
-        <textarea name="alamat_supplier" id="ealamat" class="form-control">'.$row['alamat_supplier'].'</textarea>
-        <br /> 
-        <label>Nomor Handphone</label>
-        <input type="text" name="hp_supplier" id="hp" value="'.$row['hp_supplier'].'" class="form-control" />
-        <br />
-        <input type="submit" name="update" id="update" value="Update" class="btn btn-success" />
- 
-    </form>
-     ';
-    echo $output;
 }
 ?>

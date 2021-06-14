@@ -8,7 +8,7 @@
 	$query = mysqli_query($conn, $sql) or die (mysqli_error());
  
 	if($query){
-        header("location:data.php");
+        header("location:supplier.php");
 	} else {
 		echo "Error :".$sql."<br>".mysqli_error($conn);
 	}

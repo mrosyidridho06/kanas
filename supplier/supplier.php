@@ -1,87 +1,65 @@
-<?php 
-require_once "../config.php";
-?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Supplier</title>
-    <!-- <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css"> -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700">
-    <!-- <link rel="stylesheet" href="../assets/fonts/font-awesome.min.css"> -->
-    <!-- <link rel="stylesheet" href="../assets/css/Contact-Form-Clean.css"> -->
-    <!-- <link rel="stylesheet" href="../assets/css/Navigation-Clean.css"> -->
+    <link rel="stylesheet" href="../assets/DataTables/DataTables-1.10.24/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="../assets/DataTables/Button-1.7.0/css/buttons.bootstrap4.min.css">
+    <script src="../assets/DataTables/jQuery-3.3.1/jquery-3.3.1.js"></script>
+    <script src="../assets/DataTables/DataTables-1.10.24/js/jquery.dataTables.min.js"></script>
 </head>
 <body>
-   <?php include('../sidebar.php')?>
-    <!-- <section class="cntact-clean" style="background: var(--light);"> -->
-            <h3 class="text-center">Data Supplier</h3>
-        <main id="supplier-table">
-        <div class="container">
-        <div align="right">
-        <div class="pb-3">
-            <button type="button" name="age" id="age" data-toggle="modal" data-target="#add_data_Modal" class="btn btn-primary">Tambah Data Supplier</button>
+<?php include('../sidebar.php')?>
+    <div class="container">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h4 class="m-0 font-weight-bold text-primary text-center">Supplier</h4>
+                <div align="right" class="pt-1">
+                    <button type="button" name="age" id="age" data-toggle="modal" data-target="#add_data_Modal" class="btn btn-primary"><i class="fa fa-plus"> Tambah Supplier</i></button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover display" id="example" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Nama</th>
+                                <th>Alamat</th>
+                                <th>Hp</th>
+                                <th align="center">Aksi</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
-        <table class="table table-hover">
-        <tr>
-            <th>No</th>
-            <th>Nama Supplier</th>
-            <th>Alamat</th>
-            <th>No. Hp</th>
-            <th>Lihat Detail</th>
-            <th>Edit</th>
-            <th>Hapus</th>
-        </tr>
-            <?php
-                require_once "../config.php";
-                    // Tampilkan semua data
-                    $q = $conn->query("SELECT * FROM tb_supplier");
-
-                    $no = 1; // nomor urut
-                    while($row = mysqli_fetch_assoc($q)){
-            ?>
-            <tr>
-                <td><?= $no++ ?></td>
-                <td><?php echo $row["nama_supplier"]; ?></td>
-                <td><?php echo $row["alamat_supplier"]; ?></td>
-                <td><?php echo $row["hp_supplier"]; ?></td>
-                <td><input type="button" name="view" value="Lihat Detail" id="<?php echo $row["id_supplier"]; ?>" class="btn btn-info btn-xs view_data" /></td>
-                <td><input type="button" name="edit" value="Edit" id="<?php echo $row["id_supplier"]; ?>" class="btn btn-success btn-xs edit_data" /></td> 
-                <td><input type="button" name="delete" value="Hapus" id="<?php echo $row["id_supplier"]; ?>" class="btn btn-danger btn-xs hapus_data" /></td>
-            </tr>
-            <?php
-            }
-        ?>
-        </table>            
-        </div>
-        </main>
-    <!-- </section> -->
-    <footer class="footer-basic text-center">
+    <footer class="footer-basic" style="background: var(--light);">
         <p class="copyright">Company Name © 2021</p>
     </footer>
 </body>
-    <div id="add_data_Modal" class="modal fade">
+
+<!-- Modals Tambah data -->
+<div id="add_data_Modal" class="modal fade">
     <div class="modal-dialog">
     <div class="modal-content">
     <div class="modal-header">
-        <h4 class="modal-title">Input Data Dengan Menggunakan Modal Bootstrap</h4>
+        <h4 class="modal-title">Input Supplier</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
     </div>
     <div class="modal-body">
-        <form method="post" id="insert_form">
+        <form method="post" id="insert_form" action="aksi.php">
         <label>Nama Supplier</label>
-        <input type="text" name="nama_supplier" id="nama_supplier" class="form-control" />
+        <input type="text" name="nama_supplier" id="nama_supplier" class="form-control" required />
         <br />
         <label>Alamat Supplier</label>
-        <textarea name="alamat_supplier" id="alamat_supplier" class="form-control"></textarea>
+        <textarea name="alamat_supplier" id="alamat_supplier" class="form-control" required></textarea>
         <br />
         <br />  
         <label>Nomor Handphone</label>
-        <input type="text" name="hp_supplier" id="hp_supplier" class="form-control" />
+        <input type="text" name="hp_supplier" id="hp_supplier" class="form-control" required />
         <br />
         <input type="submit" name="insert" id="insert" value="Insert" class="btn btn-success" />
     
@@ -93,24 +71,7 @@ require_once "../config.php";
     </div>
     </div>
     </div>
-    
-    <div id="dataModal" class="modal fade">
-    <div class="modal-dialog">
-    <div class="modal-content">
-    <div class="modal-header">
-        <h4 class="modal-title">Detail Data Supplier</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-    </div>
-    <div class="modal-body" id="detail_karyawan">
-        
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-    </div>
-    </div>
-    </div>
-    </div>
-    
+    <!-- Modals Edit -->
     <div id="editModal" class="modal fade">
     <div class="modal-dialog">
     <div class="modal-content">
@@ -119,6 +80,20 @@ require_once "../config.php";
         <button type="button" class="close" data-dismiss="modal">&times;</button>
     </div>
     <div class="modal-body" id="form_edit">
+    <form method="post" id="edit_form" action="edit.php">
+        <label>Nama Supplier</label>
+        <input type="text" name="nama_supplier" id="nama_supplier" class="form-control" required />
+        <br />
+        <label>Alamat Supplier</label>
+        <textarea name="alamat_supplier" id="alamat_supplier" class="form-control" required></textarea>
+        <br />
+        <br />  
+        <label>Nomor Handphone</label>
+        <input type="text" name="hp_supplier" id="hp_supplier" class="form-control" />
+        <br />
+        <input type="submit" name="insert" id="insert" value="Insert" class="btn btn-success" />
+    
+        </form>
         
     </div>
     <div class="modal-footer">
@@ -127,82 +102,106 @@ require_once "../config.php";
     </div>
     </div>
     </div>
-<script>  
-$(document).ready(function(){
-// Begin Aksi Insert
- $('#insert_form').on("submit", function(event){  
-  event.preventDefault();  
-  if($('#nama_supplier').val() == "")  
-  {  
-   alert("Mohon Isi Nama ");  
-  }  
-  else if($('#alamat_supplier').val() == '')  
-  {  
-   alert("Mohon Isi Alamat");  
-  }  
-  
-  else 
-  {  
-   $.ajax({  
-    url:"aksi.php",  
-    method:"POST",  
-    data:$('#insert_form').serialize(),  
-    beforeSend:function(){  
-     $('#insert').val("Inserting");  
-    },  
-    success:function(data){  
-     $('#insert_form')[0].reset();  
-     $('#add_data_Modal').modal('hide');  
-     $('#supplier-table').html(data);  
-    }  
-   });  
-  }  
- });
-//END Aksi Insert
- 
-//Begin Tampil Detail Karyawan
- $(document).on('click', '.view_data', function(){
-  var supplier_id = $(this).attr("id_supplier");
-  $.ajax({
-   url:"select.php",
-   method:"POST",
-   data:{supplier_id:supplier_id},
-   success:function(data){
-    $('#detail_supplier').html(data);
-    $('#dataModal').modal('show');
-   }
-  });
- });
-//End Tampil Detail Karyawan
-  
-//Begin Tampil Form Edit
-  $(document).on('click', '.edit_data', function(){
-  var id_supplier = $(this).attr("id_supplier");
-  $.ajax({
-   url:"edit.php",
-   method:"POST",
-   data:{id_supplier:id_supplier},
-   success:function(data){
-    $('#form_edit').html(data);
-    $('#editModal').modal('show');
-   }
-  });
- });
-//End Tampil Form Edit
- 
-//Begin Aksi Delete Data
- $(document).on('click', '.hapus_data', function(){
-  var id_supplier = $(this).attr("id");
-  $.ajax({
-   url:"delete.php",
-   method:"POST",
-   data:{id_supplier:id_supplier},
-   success:function(data){
-   $('#supplier-table').html(data);  
-   }
-  });
- });
-}); 
-//End Aksi Delete Data
+
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="<?=base_url()?>/assets/DataTables/Buttons-1.7.0/js/dataTables.buttons.min.js"></script>
+    <script src="<?=base_url()?>/assets/DataTables/DataTables-1.10.24/js/jquery.dataTables.min.js"></script>
+    <script src="<?=base_url()?>/assets/DataTables/DataTables-1.10.24/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable( {
+                "processing": true,
+                "serverSide": true,
+                "rowId": 'id',
+                "ajax": "data_supp.php",
+                dom: 'Bftrip',
+                button: [
+                    {
+                        extend :'pdf',
+                        oriented :'potrait',
+                        pageSize : 'Legal',
+                        title : 'Daftar Bahan',
+                        download : 'open'
+                    },
+                    'csv', 'excel', 'print', 'copy'
+                ],
+                columnDefs : [
+                    {
+                        "searchable" : false,
+                        "orderable" : false,
+                        "targets" : 3,
+                        "render" : function(data, type, row) {
+                            var btn = "<center><button type='button' id='editModal' data-toggle='modal' data-target='#editModal' class='btn btn-warning'><i class=\"fa fa-edit\"></i></button> <a href=\"delete.php?id="+data+"\" onclick=\"return confirm('Yakin Mau dihapus')\"class=\"btn btn-danger btn-xs\"><i class=\"fa fa-trash\"></i></a></center>";
+                            return btn;
+                        }
+                    }
+
+                ]
+            } );
+        } );
+    </script>
+    <script>
+    $(document).ready(function(){
+        // Begin Aksi Insert
+        // $('#insert_form').on("submit", function(event){  
+        // event.preventDefault();  
+        // if($('#nama_supplier').val() == "")  
+        // {  
+        // alert("Mohon Isi Nama ");  
+        // }  
+        // else if($('#alamat_supplier').val() == '')  
+        // {  
+        // alert("Mohon Isi Alamat");  
+        // }
+        // else if($('#hp_supplier').val() == '')  
+        // {  
+        // alert("Mohon Isi Nomor Hp");  
+        // }  
+        
+        // else 
+        // {  
+        // $.ajax({  
+        //     url:"aksi.php",  
+        //     method:"POST",  
+        //     data:$('#insert_form').serialize(),  
+        //     beforeSend:function(){  
+        //     $('#insert').val("Inserting");  
+        //     },  
+        //     success:function(data){  
+        //     $('#insert_form')[0].reset();  
+        //     $('#add_data_Modal').modal('hide');  
+        //     $('#supplier-table').html(data);  
+        //     }  
+        // });  
+        // }  
+        // });
+        // end add
+        
+        // edit
+        $(document).on('click', '.edit_data', function(){
+        var id = $(this).attr("id_supplier");
+        $.ajax({
+        url:"edit.php",
+        method:"POST",
+        data:{id:id},
+        success:function(data){
+            $('#form_edit').html(data);
+            $('#editModal').modal('show');
+        }
+        });
+        });
+        // end edit
+        });
  </script>
+ <!-- jika ada session sukses maka tampilkan sweet alert dengan pesan yang telah di set
+    di dalam session sukses  -->
+    <?php if(@$_SESSION['sukses']){ ?>
+        <script>
+            swal("Good job!", "<?php echo $_SESSION['sukses']; ?>", "success");
+        </script>
+    <!-- jangan lupa untuk menambahkan unset agar sweet alert tidak muncul lagi saat di refresh -->
+    <?php unset($_SESSION['sukses']); } ?>
 </html>

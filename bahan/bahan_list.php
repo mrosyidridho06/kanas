@@ -19,7 +19,8 @@
  */
  
 // DB table to use
-$table = 'tb_bahan';
+$table = "SELECT * FROM tb_bahan INNER JOIN tb_supplier ON tb_bahan.id_supplier = tb_supplier.id_supplier";
+// $table = 'tb_bahan';
  
 // Table's primary key
 $primaryKey = 'id_bahan';
@@ -30,7 +31,7 @@ $primaryKey = 'id_bahan';
 // indexes
 $columns = array(
     array( 'db' => 'nama_barang', 'dt' => 0 ),
-    array( 'db' => 'supplier',  'dt' => 1 ),
+    array( 'db' => 'nama_supplier',  'dt' => 1 ),
     array( 'db' => 'jumlah_barang',   'dt' => 2 ),
     array( 'db' => 'satuan',     'dt' => 3 ),
     array( 'db' => 'harga_barang',     'dt' => 4 ),
@@ -51,6 +52,7 @@ $columns = array(
     //     }
     // )
 );
+// $aColumns = array('id_supplier', 'nama_supplier');
  
 // SQL server connection information
 include_once "conn.php";
