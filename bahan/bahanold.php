@@ -75,7 +75,7 @@ if(isset($_POST['save'])){
     <section class="contact-clean" style="background: var(--light);">
         <main>
             <h2 style="text-shadow: 0px 0px 1px var(--blue);text-align: center;">Bahan Baku</h2>
-            <form class="shadow" action="proses.php" method="post">
+            <form class="shadow" action="" method="post">
                 <h2 class="text-center">Input Bahan Baku</h2><label>Nama Barang</label>
                 <div class="form-group" style="margin: 1px;padding: 0px;padding-bottom: 6px;"><input class="form-control" type="text" name="nama_barang" placeholder="Nama Barang"></div><label>Supplier</label>
                 <div class="form-group" style="margin: 1px;padding: 0px;padding-bottom: 6px;"><select class="form-control" name="supplier" required>

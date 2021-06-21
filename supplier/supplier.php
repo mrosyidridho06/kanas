@@ -17,6 +17,7 @@
             <div class="card-header py-3">
                 <h4 class="m-0 font-weight-bold text-primary text-center">Supplier</h4>
                 <div align="right" class="pt-1">
+                    <a href="" class="btn btn-success btn-xs"><i class="fa fa-refresh"></i></a>
                     <button type="button" name="age" id="age" data-toggle="modal" data-target="#add_data_Modal" class="btn btn-primary"><i class="fa fa-plus"> Tambah Supplier</i></button>
                 </div>
             </div>
@@ -28,9 +29,11 @@
                                 <th>Nama</th>
                                 <th>Alamat</th>
                                 <th>Hp</th>
-                                <th align="center">Aksi</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
+                        <tbody>
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -117,24 +120,24 @@
                 "serverSide": true,
                 "rowId": 'id',
                 "ajax": "data_supp.php",
-                dom: 'Bftrip',
-                button: [
-                    {
-                        extend :'pdf',
-                        oriented :'potrait',
-                        pageSize : 'Legal',
-                        title : 'Daftar Bahan',
-                        download : 'open'
-                    },
-                    'csv', 'excel', 'print', 'copy'
-                ],
+                // dom: 'Bftrip',
+                // button: [
+                //     {
+                //         extend :'pdf',
+                //         oriented :'potrait',
+                //         pageSize : 'Legal',
+                //         title : 'Daftar Bahan',
+                //         download : 'open'
+                //     },
+                //     'csv', 'excel', 'print', 'copy'
+                // ],
                 columnDefs : [
                     {
                         "searchable" : false,
                         "orderable" : false,
                         "targets" : 3,
                         "render" : function(data, type, row) {
-                            var btn = "<center><button type='button' id='editModal' data-toggle='modal' data-target='#editModal' class='btn btn-warning'><i class=\"fa fa-edit\"></i></button> <a href=\"delete.php?id="+data+"\" onclick=\"return confirm('Yakin Mau dihapus')\"class=\"btn btn-danger btn-xs\"><i class=\"fa fa-trash\"></i></a></center>";
+                            var btn = "<center><a href=\"edit.php\" id='editModal' data-toggle='modal' data-target='#editModal'><span class=\"fa fa-edit\"></span></a><a href=\"delete.php?id="+data+"\" onclick=\"return confirm('Yakin Mau dihapus')\"class=\"pl-4\"><i class=\"fa fa-trash\"></i></a></center>";
                             return btn;
                         }
                     }
@@ -145,41 +148,6 @@
     </script>
     <script>
     $(document).ready(function(){
-        // Begin Aksi Insert
-        // $('#insert_form').on("submit", function(event){  
-        // event.preventDefault();  
-        // if($('#nama_supplier').val() == "")  
-        // {  
-        // alert("Mohon Isi Nama ");  
-        // }  
-        // else if($('#alamat_supplier').val() == '')  
-        // {  
-        // alert("Mohon Isi Alamat");  
-        // }
-        // else if($('#hp_supplier').val() == '')  
-        // {  
-        // alert("Mohon Isi Nomor Hp");  
-        // }  
-        
-        // else 
-        // {  
-        // $.ajax({  
-        //     url:"aksi.php",  
-        //     method:"POST",  
-        //     data:$('#insert_form').serialize(),  
-        //     beforeSend:function(){  
-        //     $('#insert').val("Inserting");  
-        //     },  
-        //     success:function(data){  
-        //     $('#insert_form')[0].reset();  
-        //     $('#add_data_Modal').modal('hide');  
-        //     $('#supplier-table').html(data);  
-        //     }  
-        // });  
-        // }  
-        // });
-        // end add
-        
         // edit
         $(document).on('click', '.edit_data', function(){
         var id = $(this).attr("id_supplier");

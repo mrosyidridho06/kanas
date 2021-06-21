@@ -4,7 +4,7 @@ require_once "../config.php";
 // $namaErr = $alamatErr = $jkErr= $hpErr = $agmErr = $jbtnErr;
 
 //JIKA MENGIRIMKAN DATA DENGAN NAME "SAVE" (TOMBOL SAVE TELAH DI KLIK)
-if(isset($_POST['save'])){
+if(!empty($_POST)){
     // var_dump($_POST); 
     // var_dump($_FILES);
     // die;
@@ -49,23 +49,24 @@ if(isset($_POST['save'])){
         $ukuran = $_FILES['file_foto']['size'];
         $file_tmp = $_FILES['file_foto']['tmp_name'];
         
-        $nama_peg = $_POST['nama_pegawai'];
-        $alamat = $_POST['alamat_pegawai'];
-        $JK = $_POST['jenis_kelamin'];
-        $hp = $_POST['hp_pegawai'];
-        $agama = $_POST['agama'];
-        $jabatan = $_POST['jabatan_pegawai'];
-        $tglmasuk = $_POST['tanggal_masuk'];
+        $nama_peg = mysqli_real_escape_string($conn, $_POST['nama_pegawai']);
+        $alamat = mysqli_real_escape_string($conn, $_POST['alamat_pegawai']);
+        $JK = mysqli_real_escape_string($conn, $_POST['jenis_kelamin']);
+        $hp = mysqli_real_escape_string($conn, $_POST['hp_pegawai']);
+        $agama = mysqli_real_escape_string($conn, $_POST['agama']);
+        $jabatan = mysqli_real_escape_string($conn, $_POST['jabatan_pegawai']);
+        $tglmasuk = mysqli_real_escape_string($conn, $_POST['tanggal_masuk']);
                                 
                 //KONEKSI DATABASE DAN EKSEKUSI QUERY 
                 
                 if(in_array($ekstensi, $ekstensi_diperbolehkan) === true){
                     if($ukuran < 4044070){
                         move_uploaded_file($file_tmp, 'img/'.$nama_gambar);
-                        $query = "INSERT INTO tb_pegawai (nama_pegawai , alamat_pegawai, jenis_kelamin, hp_pegawai, agama, jabatan_pegawai, tanggal_masuk, foto, file_foto) VALUES ('$nama_peg', '$alamat','$JK, '$hp', '$agama', '$jabatan', '$tglmasuk', '$nama_gambar', '$file_tmp')";
-                        mysqli_query($conn, $query);
-                        if($query){
+                        $query = "INSERT INTO tb_pegawai (nama_pegawai , alamat_pegawai, jenis_kelamin, hp_pegawai, agama, jabatan_pegawai, tanggal_masuk, foto) VALUES ('$nama_peg', '$alamat','$JK', '$hp', '$agama', '$jabatan', '$tglmasuk', '$nama_gambar')";
+                        $sql = mysqli_query($conn, $query);
+                        if($sql){
                             echo 'file berhasil di upload';
+                            header('location: pegawai.php');
                         }else{
                             echo 'gagal';
                         }

@@ -34,27 +34,27 @@
                 </thead>
                 <tbody>
                 <?php
-                require('config.php');
-                    // Tampilkan semua data
-                    $q = $conn->query("SELECT * FROM tb_bahan");
+                        include_once "../config.php";
+                            // Tampilkan semua data
+                            $q = $conn->query("SELECT * FROM tb_bahan INNER JOIN tb_supplier ON tb_bahan.id_supplier = tb_supplier.id_supplier");
 
-                    $no = 1; // nomor urut
-                    while($dt = mysqli_fetch_assoc($q)){
-                    ?>
-                    <tr>  
-                    <td><?= $no++ ?></td>
-                    <td><?= $dt['nama_barang'] ?></td>
-                    <td><?= $dt['supplier'] ?></td>
-                    <td><?= $dt['jumlah_barang'] ?></td>
-                    <td><?= $dt['satuan'] ?></td>
-                    <td><?= $dt['harga_barang'] ?></td>
-                    <td><?= $dt['waktu'] ?></td>
-                    <td><a href="edit.php?id=<?=$dt['id_bahan']?>" title="Edit" data-toggle="tooltip"><span class="fa fa-pencil"></span></a></td>
-                    <td><a href="delete.php?id=<?= $dt['id_bahan'] ?>" onclick="return confirm('Anda yakin akan menghapus data ini?')" title="Hapus" data-toggle="tooltip"><span class="fa fa-trash"></span></a></td>
-                    </tr>
-                    <?php
-                    }
-                ?> 
+                            $no = 1; // nomor urut
+                            while($dt = mysqli_fetch_array($q)){
+                            ?>
+                            <tr>  
+                                <td><?= $no++?>.</td>
+                                <td><?= $dt['nama_barang'] ?></td>
+                                <td><?= $dt['nama_supplier'] ?></td>
+                                <td><?= $dt['jumlah_barang'] ?></td>
+                                <td><?= $dt['satuan'] ?></td>
+                                <td><?= $dt['harga_barang'] ?></td>
+                                <td><?= $dt['waktu'] ?></td>
+                                <td><a href="edit.php?id=<?=$dt['id_bahan']?>" title="Edit" data-toggle="tooltip"><span class="fa fa-edit"></span></a></td>
+                                <td><a href="delete.php?id=<?= $dt['id_bahan'] ?>" onclick="return confirm('Anda yakin akan menghapus data ini?')" title="Hapus" data-toggle="tooltip"><span class="fa fa-trash"></span></a></td>
+                            </tr>
+                            <?php
+                            }
+                        ?> 
                 </tbody>
             </table>
         </div>

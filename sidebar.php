@@ -44,7 +44,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item">
-      <a class="nav-link" href="<?=base_url()?>/index.php">
+      <a class="nav-link" href="<?=base_url()?>/dashboard.php">
         <i class="fas fa-fw fa-home"></i>
         <span>Dashboard</span></a>
     </li>
@@ -153,7 +153,7 @@
           <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin</span>
-              <img class="img-profile rounded-circle" src="../data/images/admin.jpg">
+              <img class="img-profile rounded-circle" src="<?=base_url()?>/assets/img/pesanlokal-com-kanaskitchen-logo-aLgOa7-removebg-preview.png">
             </a>
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">

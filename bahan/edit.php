@@ -16,24 +16,24 @@
 </head>
 
 <body>
-   <?php require('navbar.php')?>
+   <?php require('../sidebar.php')?>
     <section class="contact-clean" style="background: var(--light);">
         <main>
             <h2 style="text-shadow: 0px 0px 1px var(--blue);text-align: center;">Bahan Baku</h2>
             <?php
 
-                include("config.php");
+                include_once  "../config.php";
 
                 // kalau tidak ada id di query string
                 if( !isset($_GET['id']) ){
-                    header('Location: list.php');
+                    header('Location: bahan.php');
                 }
 
                 //ambil id dari query string
                 $id = $_GET['id'];
 
                 // buat query untuk ambil data dari database
-                $sql = "SELECT * FROM tb_bahan WHERE id_bahan=$id";
+                $sql = "SELECT * FROM tb_bahan INNER JOIN tb_supplier ON tb_bahan.id_supplier = tb_supplier.id_supplier WHERE id_bahan=$id ";
                 $query = mysqli_query($conn, $sql);
                 $bahan = mysqli_fetch_assoc($query);
 
@@ -45,11 +45,9 @@
                 ?>
 
             <form class="shadow" action="update.php" method="post">
-                <h2 class="text-center">Input Bahan Baku</h2>
                 <label>Nama Barang</label>
                 <div class="form-group" style="margin: 1px;padding: 0px;padding-bottom: 6px;"><input type="hidden" name="id_bahan" value="<?php echo $bahan['id_bahan']; ?>"><input class="form-control" type="text" name="nama_barang" value="<?php echo $bahan['nama_barang']; ?>"></div>
-                <label>Supplier</label>
-                <div class="form-group" style="margin: 1px;padding: 0px;padding-bottom: 6px;"><input class="form-control" type="text" name="supplier" value="<?php echo $bahan['supplier']; ?>"></div>
+                <div class="form-group" style="margin: 1px;padding: 0px;padding-bottom: 6px;"><label>Supplier</label><input class="form-control" type="text" name="nama_supplier" value="<?php echo $bahan['nama_supplier']; ?>" disabled></div>
                 <div class="form-group" style="margin: 1px;padding: 0px;padding-bottom: 6px;"><label>Jumlah Barang</label><input class="form-control" type="text" name="jumlah_barang" value="<?php echo $bahan['jumlah_barang']; ?>"></div>
                 <div class="form-group" style="margin: 1px;padding: 0px;padding-bottom: 6px;"><label for="satuan">Satuan</label><?php $satuan = $bahan['satuan']; ?><select class="form-control" name="satuan">
                         <option <?php echo ($satuan == 'Gram') ? "selected": "" ?>>Gram</option>

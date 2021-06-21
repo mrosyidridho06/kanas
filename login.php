@@ -1,4 +1,8 @@
-<?php include_once('config.php')?>
+<?php include_once('config.php');
+if(isset($_SESSION['user'])){
+    echo "<script>window.location='".base_url()."';</scirpt>";
+} else{
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,11 +22,11 @@
         $sql_login = mysqli_query($conn, "SELECT * FROM tb_user WHERE username = '$user' AND password = '$pass'") or die(mysqli_error($conn));
         if(mysqli_num_rows($sql_login) > 0){
             $_SESSION['user'] = $user;
-            echo "<script>window.location='bahan.php';</script>";
+            header('location: bahan/bahan.php');
         }else { ?>
         <div class="row">
             <div class="col-lg-6 col-lg-offset-3">
-                <div class="alert alert-danger alert-dissmisable" role="alert">
+                <div class="alert alert-danger alert-dissmisable" role="alert">Username atau Password Salah!!!
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">
                 </div>
             </div>
@@ -69,3 +73,6 @@ form{
 }
 </style>
 </html>
+<?php
+}
+?>

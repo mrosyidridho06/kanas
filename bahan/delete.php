@@ -1,5 +1,5 @@
 <?php
-	include "config.php";
+	include "../config.php";
  
 	$idh = $_GET["id"];
  
@@ -8,7 +8,7 @@
 	$query = mysqli_query($conn, $sql) or die (mysqli_error());
  
 	if($query){
-        header("location:list.php");
+        header("Location: bahan.php");
 	} else {
 		echo "Error :".$sql."<br>".mysqli_error($conn);
 	}

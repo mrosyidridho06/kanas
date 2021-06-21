@@ -6,10 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bahan</title>
-    <link rel="stylesheet" href="../assets/DataTables/DataTables-1.10.24/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">
+    <!-- <link rel="stylesheet" href="../assets/DataTables/DataTables-1.10.24/css/jquery.dataTables.css"> -->
     <!-- <link rel="stylesheet" href="../assets/DataTables/Button-1.7.0/css/buttons.bootstrap4.min.css"> -->
-    <script src="../assets/DataTables/jQuery-3.3.1/jquery-3.3.1.js"></script>
-    <script src="../assets/DataTables/DataTables-1.10.24/js/jquery.dataTables.min.js"></script>
+    <!-- <link rel="stylesheet" href="../assets/DataTables/dataTables.css"> -->
+
 </head>
 <body>
 <?php include('../sidebar.php')?>
@@ -18,23 +20,28 @@
             <div class="card-header py-3">
                 <h4 class="m-0 font-weight-bold text-primary text-center">Bahan Baku</h4>
                 <div align="right" class="pt-1">
+                    <a href="" class="btn btn-success btn-xs"><i class="fa fa-refresh"></i></a>
                     <button type="button" name="age" id="age" data-toggle="modal" data-target="#add_data_Modal" class="btn btn-primary"><i class="fa fa-plus"> Tambah Bahan</i></button>
                 </div>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-hover display" id="example" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th>Nama</th>
-                                <th>Supplier</th>
-                                <th>Jumlah</th>
-                                <th>Satuan</th>
-                                <th>Harga</th>
-                                <th>Waktu</th>
-                                <th align="center">Aksi</th>
-                            </tr>
-                        </thead>
+                    <table class="table table-hover display" id="bahan_b">
+                    <thead>
+                        <tr>
+                            <!-- <th>No.</th> -->
+                            <th scope="row">Nama</th>
+                            <th scope="row">Supplier</th>
+                            <th scope="row">Jumlah</th>
+                            <th scope="row">Satuan</th>
+                            <th scope="row">Harga</th>
+                            <th scope="row">Tanggal Input</th>
+                            <th colspan="2" class="text-center">Edit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
                     </table>
                 </div>
             </div>
@@ -54,7 +61,7 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
     </div>
     <div class="modal-body">
-        <form method="post" id="insert_form">
+        <form method="post" id="insert_form" action="proses.php">
         <label>Nama Bahan</label>
         <input type="text" name="nama_barang" id="nama_barang" class="form-control" />
         <br />
@@ -72,7 +79,7 @@
         <input type="number" name="jumlah_barang" id="jumlah_barang" class="form-control"></input>
         <br />  
         <label>Satuan</label>
-        <select class="form-control" name="supplier" required>
+        <select class="form-control" name="satuan" required>
             <option value="" selected="">Pilih Satuan</option>
             <option value="Gram">Gram</option>
             <option value="Pcs">Pcs</option>
@@ -80,7 +87,7 @@
         </select>
         <br />
         <label>Harga</label>
-        <input type="text" name="harga_barang" id="harga_barang" class="form-control" />
+        <input type="number" name="harga_barang" id="harga_barang" class="form-control" />
         <br />
         <input type="submit" name="insert" id="insert" value="Insert" class="btn btn-success" />
         </form>
@@ -108,39 +115,39 @@
     </div>
     </div>
     </div>
-
-
-
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <!-- <script src="<?=base_url()?>/assets/DataTables/Buttons-1.7.0/js/dataTables.buttons.min.js"></script> -->
-    <script src="<?=base_url()?>/assets/DataTables/DataTables-1.10.24/js/jquery.dataTables.min.js"></script>
-    <script src="<?=base_url()?>/assets/DataTables/DataTables-1.10.24/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+    <!-- <script src="<?=base_url()?>/assets/DataTables/jQuery-3.3.1/jQuery-3.3.1.js"></script> -->
+    <!-- <script src="<?=base_url()?>/assets/DataTables/dataTables.min.js"></script>
+    <script src="<?=base_url()?>/assets/DataTables/DataTables-1.10.24/js/dataTables.bootstrap4.js"></script> -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <script>
         $(document).ready(function() {
-            $('#example').DataTable( {
-                "processing": true,
+            $('#bahan_b').DataTable( {
+                "processing": false,
                 "serverSide": true,
                 "rowId": 'id',
                 "ajax": "bahan_list.php",
-                dom: 'Bftrip',
-                button: [
-                    {
-                        extend :'pdf',
-                        oriented :'potrait',
-                        pageSize : 'Legal',
-                        title : 'Daftar Bahan',
-                        download : 'open'
-                    },
-                    'csv', 'excel', 'print', 'copy'
-                ],
+                // dom: 'Bftrip',
+                // button: [
+                //     {
+                //         extend :'pdf',
+                //         oriented :'potrait',
+                //         pageSize : 'Legal',
+                //         title : 'Daftar Bahan',
+                //         download : 'open'
+                //     },
+                //     'csv', 'excel', 'print', 'copy'
+                // ],
                 columnDefs : [
                     {
                         "searchable" : false,
                         "orderable" : false,
                         "targets" : 6,
                         "render" : function(data, type, row) {
-                            var btn = "<center><a href=\"edit.php?id="+data+"\"class=\"btn btn-warning btn-xs\"><i class=\"fa fa-edit\"></i></a><a href=\"delete.php?id="+data+"\" onclick=\"return confirm('Yakin Mau dihapus')\"class=\"btn btn-danger btn-xs\"><i class=\"fa fa-trash\"></i></a></center>";
+                            var btn = "<center><a href=\"edit.php\" data-toggle='modal' data-target='#editModal'><span class=\"fa fa-edit\"></span></a><a href=\"delete.php?id="+data+"\" onclick=\"return confirm('Yakin Mau dihapus')\"class=\"pl-4\"><i class=\"fa fa-trash\"></i></a></center>";
                             return btn;
                         }
                     }
@@ -149,57 +156,11 @@
             } );
         } );
     </script>
-    <script>
-    $(document).ready(function(){
-        // Begin Aksi Insert
-        $('#insert_form').on("submit", function(event){  
-        event.preventDefault();  
-        if($('#nama_supplier').val() == "")  
-        {  
-        alert("Mohon Isi Nama ");  
-        }  
-        else if($('#alamat_supplier').val() == '')  
-        {  
-        alert("Mohon Isi Alamat");  
-        }
-        else if($('#hp_supplier').val() == '')  
-        {  
-        alert("Mohon Isi Nomor Hp");  
-        }  
-        
-        else 
-        {  
-        $.ajax({  
-            url:"proses.php",  
-            method:"POST",  
-            data:$('#insert_form').serialize(),  
-            beforeSend:function(){  
-            $('#insert').val("Inserting");  
-            },  
-            success:function(data){  
-            $('#insert_form')[0].reset();  
-            $('#add_data_Modal').modal('hide');  
-            $('#supplier-table').html(data);  
-            }  
-        });  
-        }  
-        });
-        // end add
-        
-        // edit
-        $(document).on('click', '.edit_data', function(){
-        var id_supplier = $(this).attr("id_supplier");
-        $.ajax({
-        url:"edit.php",
-        method:"POST",
-        data:{id_supplier:id_supplier},
-        success:function(data){
-            $('#form_edit').html(data);
-            $('#editModal').modal('show');
-        }
-        });
-        });
-        // end edit
-        });
- </script>
+
+    <?php if(@$_SESSION['sukses']){ ?>
+        <script>
+            swal("Good job!", "<?php echo $_SESSION['sukses']; ?>", "success");
+        </script>
+    <!-- jangan lupa untuk menambahkan unset agar sweet alert tidak muncul lagi saat di refresh -->
+    <?php unset($_SESSION['sukses']); } ?>
 </html>
