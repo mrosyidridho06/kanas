@@ -16,14 +16,14 @@
 <body>
 <?php include('../sidebar.php')?>
     <div class="container">
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h4 class="m-0 font-weight-bold text-primary text-center">Bahan Baku</h4>
-                <div align="right" class="pt-1">
-                    <a href="" class="btn btn-success btn-xs"><i class="fa fa-refresh"></i></a>
-                    <button type="button" name="age" id="age" data-toggle="modal" data-target="#add_data_Modal" class="btn btn-primary"><i class="fa fa-plus"> Tambah Bahan</i></button>
-                </div>
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Bahan Baku</h1>
+            <div align="right" class="pt-1">
+                <a href="" class="btn btn-success btn-xs"><i class="fa fa-refresh"></i></a>
+                <button type="button" name="age" id="age" data-toggle="modal" data-target="#add_data_Modal" class="btn btn-primary"><i class="fa fa-plus"> Tambah Bahan</i></button>
             </div>
+        </div>
+        <div class="card shadow mb-4">
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-hover display" id="bahan_b">
@@ -107,7 +107,19 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
     </div>
     <div class="modal-body" id="form_edit">
-        
+        <form class="shadow" action="update.php" method="post">
+            <label>Nama Barang</label>
+            <div class="form-group" style="margin: 1px;padding: 0px;padding-bottom: 6px;"><input type="hidden" name="id_bahan" value="<?php echo $bahan['id_bahan']; ?>"><input class="form-control" type="text" name="nama_barang" value="<?php echo $bahan['nama_barang']; ?>"></div>
+            <div class="form-group" style="margin: 1px;padding: 0px;padding-bottom: 6px;"><label>Supplier</label><input class="form-control" type="text" name="nama_supplier" value="<?php echo $bahan['nama_supplier']; ?>" disabled></div>
+            <div class="form-group" style="margin: 1px;padding: 0px;padding-bottom: 6px;"><label>Jumlah Barang</label><input class="form-control" type="text" name="jumlah_barang" value="<?php echo $bahan['jumlah_barang']; ?>"></div>
+            <div class="form-group" style="margin: 1px;padding: 0px;padding-bottom: 6px;"><label for="satuan">Satuan</label><?php $satuan = $bahan['satuan']; ?><select class="form-control" name="satuan">
+                    <option <?php echo ($satuan == 'Gram') ? "selected": "" ?>>Gram</option>
+                    <option <?php echo ($satuan == 'Pcs') ? "selected": "" ?>>Pcs</option>
+                    <option <?php echo ($satuan == 'mL') ? "selected": "" ?>>mL</option>
+            </select></div>
+            <div class="form-group" style="margin: 1px;padding: 0px;padding-bottom: 6px;"><label>Harga</label><input class="form-control" type="text" name="harga_barang" value="<?php echo $bahan['harga_barang']; ?>"></div>
+            <div class="form-group" style="text-align: right;"><input class="btn btn-primary" name="save" value="save" type="submit"></input></div>
+        </form>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -147,7 +159,7 @@
                         "orderable" : false,
                         "targets" : 6,
                         "render" : function(data, type, row) {
-                            var btn = "<center><a href=\"edit.php\" data-toggle='modal' data-target='#editModal'><span class=\"fa fa-edit\"></span></a><a href=\"delete.php?id="+data+"\" onclick=\"return confirm('Yakin Mau dihapus')\"class=\"pl-4\"><i class=\"fa fa-trash\"></i></a></center>";
+                            var btn = "<center><a href=\"edit.php?id="+data+"\"><span class=\"fa fa-edit\"></span></a><a href=\"delete.php?id="+data+"\" onclick=\"return confirm('Yakin Mau dihapus')\"class=\"pl-4\"><i class=\"fa fa-trash\"></i></a></center>";
                             return btn;
                         }
                     }
@@ -157,10 +169,73 @@
         } );
     </script>
 
+    <script>
+    $('#update_form').on("submit", function(event){  
+        event.preventDefault();  
+        if($('#enama').val() == "")  
+        {  
+        alert("Mohon Isi Nama ");  
+        }  
+        else if($('#ealamat').val() == '')  
+        {  
+        alert("Mohon Isi Alamat");  
+        }  
+        
+        else 
+        {  
+        $.ajax({  
+            url:"update.php",  
+            method:"POST",  
+            data:$('#update_form').serialize(),  
+            beforeSend:function(){  
+            $('#update').val("Updating");  
+            },  
+            success:function(data){  
+            $('#update_form')[0].reset();  
+            $('#editModal').modal('hide');  
+            $('#employee_table').html(data);  
+            }  
+        });  
+        }  
+        });
+</script>
+    <?php 
+    if(isset($_POST["id"]))
+    {
+    $output = '';
+    require_once "../config.php";
+    $query = "SELECT * FROM tb_supplier WHERE id = '".$_POST["supplier_id"]."'";
+    $result = mysqli_query($conn, $query);
+    }
+    ?>
+
     <?php if(@$_SESSION['sukses']){ ?>
         <script>
             swal("Good job!", "<?php echo $_SESSION['sukses']; ?>", "success");
         </script>
     <!-- jangan lupa untuk menambahkan unset agar sweet alert tidak muncul lagi saat di refresh -->
     <?php unset($_SESSION['sukses']); } ?>
+
+    <?php if(@$_SESSION['hapus']){ ?>
+        <script>
+            Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.value) {
+            Swal.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+            )
+            }
+        })
+        </script>
+    <!-- jangan lupa untuk menambahkan unset agar sweet alert tidak muncul lagi saat di refresh -->
+    <?php unset($_SESSION['hapus']); } ?>
 </html>

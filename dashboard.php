@@ -21,7 +21,80 @@
     ?>
     
     <div class="container-fluid">
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+        </div>
         <div class="row">
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                    Jumlah Bahan</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $jumlahbah;?></div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-cubes fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                    Jumlah Supplier</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $jumlahsup;?></div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-id-badge fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                    Jumlah Pegawai</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $jumlahpeg;?></div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-users fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                    Jumlah Resep</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $jumlahsup;?></div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-cube fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <!-- <div class="row">
             <div class="col-xl-3 col-lg-4">
                 <div class="card shadow rounded">
                     <div class="card-body">
@@ -58,11 +131,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <footer class="footer-basic" style="background: var(--light);">
-        <p class="copyright">Company Name © 2021</p>
-    </footer>
+        </div> -->
 </body>
 
 </html>

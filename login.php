@@ -1,7 +1,35 @@
-<?php include_once('config.php');
-if(isset($_SESSION['user'])){
-    echo "<script>window.location='".base_url()."';</scirpt>";
-} else{
+<?php
+require_once("configlogin.php");
+if(isset($_POST['login'])){
+    $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
+    $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+
+    $sql = "SELECT * FROM tb_users WHERE username=:username";
+    $stmt = $db->prepare($sql);
+    
+    // bind parameter ke query
+    $params = array(
+        ":username" => $username,
+        ":email" => $username
+    );
+
+    $stmt->execute($params);
+
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    // jika user terdaftar
+    if($user){
+        // verifikasi password
+        if(password_verify($password, $user["password"])){
+            // buat Session
+            session_start();
+            $_SESSION["user"] = $user;
+            // login sukses, alihkan ke halaman timeline
+            header("Location: ./bahan/bahan.php");
+        }
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,26 +43,7 @@ if(isset($_SESSION['user'])){
 <body>
 <div id="wrapper">
     <div class="container">
-    <?php
-    if(isset($_POST['login'])){
-        $user = trim(mysqli_real_escape_string($conn, $_POST['user']));
-        $pass = sha1(trim(mysqli_real_escape_string($conn, $_POST['pass'])));
-        $sql_login = mysqli_query($conn, "SELECT * FROM tb_user WHERE username = '$user' AND password = '$pass'") or die(mysqli_error($conn));
-        if(mysqli_num_rows($sql_login) > 0){
-            $_SESSION['user'] = $user;
-            header('location: bahan/bahan.php');
-        }else { ?>
-        <div class="row">
-            <div class="col-lg-6 col-lg-offset-3">
-                <div class="alert alert-danger alert-dissmisable" role="alert">Username atau Password Salah!!!
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">
-                </div>
-            </div>
-        </div>
-        <?php
-        }
-    }
-    ?>
+    <!-- -->
         <div style="margin-top: 100px;">
             <div class="form-signin rounded shadow">
             <div align="center">
@@ -47,11 +56,11 @@ if(isset($_SESSION['user'])){
                         <div class="input-group-prepend">
                         <!-- <div class="input-group-text">@</div> -->
                         </div>
-                        <input type="text" name="user" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Username" required>
+                        <input type="text" name="username" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Username" required>
                     </div>
                     <div class="form-floating mb-3">
                         <label for="password">Password</label>
-                        <input class="form-control" type="password" name="pass" placeholder="Password" required />
+                        <input class="form-control" type="password" name="password" placeholder="Password" required />
                     </div>
                     <input class="w-100 btn btn-lg btn-block btn-primary" type="submit" name="login" value="Masuk"></input>
                 </form>
@@ -73,6 +82,3 @@ form{
 }
 </style>
 </html>
-<?php
-}
-?>

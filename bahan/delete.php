@@ -1,6 +1,9 @@
 <?php
 	include "../config.php";
  
+
+	session_start();
+
 	$idh = $_GET["id"];
  
 	// query sql
@@ -13,5 +16,7 @@
 		echo "Error :".$sql."<br>".mysqli_error($conn);
 	}
  
+	$_SESSION["hapus"] = 'Data Berhasil Dihapus';
+
 	mysqli_close($conn);
 ?>

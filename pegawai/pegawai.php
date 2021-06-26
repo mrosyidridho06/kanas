@@ -23,13 +23,14 @@
 <body>
    <?php include_once '../sidebar.php'?>
         <div class="container">
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Pegawai</h1>
+            <div align="right" class="pt-1">
+                <a href="" class="btn btn-success btn-xs"><i class="fa fa-refresh"></i></a>
+                <button type="button" name="age" id="age" data-toggle="modal" data-target="#add_data_Modal" class="btn btn-primary"><i class="fa fa-plus"> Tambah Pegawai</i></button>
+            </div>
+        </div>
             <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                <h4 class="m-0 font-weight-bold text-primary text-center">Pegawai</h4>
-                    <div align="right" class="pt-1">
-                        <a href="" class="btn btn-success btn-xs"><i class="fa fa-refresh"></i></a>
-                        <button type="button" name="age" id="age" data-toggle="modal" data-target="#add_data_Modal" class="btn btn-primary"><i class="fa fa-plus"> Tambah Pegawai</i></button>
-                    </div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-hover display" id="example" width="100%" cellspacing="0">

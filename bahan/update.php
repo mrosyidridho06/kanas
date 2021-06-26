@@ -14,7 +14,7 @@ if(isset($_POST['save'])){
     $harga = $_POST['harga_barang'];
 
     // buat query update
-    $sql = "UPDATE tb_bahan, tb_supplier SET nama_barang='$nama', tb_supplier.id_supplier = tb_bahan.id_supplier, jumlah_barang='$jb', satuan='$satuan', harga_barang='$harga' WHERE id_bahan=$id";
+    $sql = "UPDATE tb_bahan a, tb_supplier b SET nama_barang='$nama', b.id_supplier = a.id_supplier, jumlah_barang='$jb', satuan='$satuan', harga_barang='$harga' WHERE id_bahan=$id AND a.id_supplier = b.id_supplier";
     $query = mysqli_query($conn, $sql);
 
     // apakah query update berhasil?

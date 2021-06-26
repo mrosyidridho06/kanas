@@ -34,7 +34,7 @@ if(isset($_SESSION['user'])){
             <div class="container-fluid"><a class="navbar-brand" href="#"><img src="assets/img/pesanlokal-com-kanaskitchen-logo-aLgOa7-removebg-preview.png" style="height: 54px;">Kana's Kitchen</a><button data-toggle="collapse" class="navbar-toggler btn btn-light" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navcol-1">
                     <ul class="navbar-nav">
-                        <li class="nav-item"><a class="nav-link" href="./bahan/bahan.php" style="border-color: rgb(34,34,34);color: rgb(34,34,34);">Toko</a></li>
+                        <li class="nav-item"><a class="nav-link" href="dashboard.php" style="border-color: rgb(34,34,34);color: rgb(34,34,34);">Toko</a></li>
                         <!-- <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#" style="color: rgb(34,34,34);">Dropdown </a>
                             <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
                         </li> -->
