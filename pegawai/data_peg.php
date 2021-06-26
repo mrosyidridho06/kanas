@@ -39,8 +39,8 @@ $columns = array(
     array( 
         'db' => 'foto',
         'dt' => 7,
-        'formatter' => function( $row, $d ) {
-            return "<img class='zoom' src='img/'<?php echo' style='height:50px;width:50px;align:middle;'/>";
+        'formatter' => function( $d, $row) {
+            return "<a href='img/".$row['foto']."' target='_blank'><img class='zoom' src='img/".$row['foto']."'<?php echo' style='height:50px;width:50px;align:middle;'/>";
         }),      
     array( 'db' => 'id_pegawai',     'dt' => 8 ),
     // array(
