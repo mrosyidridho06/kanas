@@ -154,3 +154,9 @@
         } );
     </script>
 </html>
+    <?php if(@$_SESSION['sukses']){ ?>
+        <script>
+            swal("Good job!", "<?php echo $_SESSION['sukses']; ?>", "success");
+        </script>
+    <!-- jangan lupa untuk menambahkan unset agar sweet alert tidak muncul lagi saat di refresh -->
+    <?php unset($_SESSION['sukses']); } ?>

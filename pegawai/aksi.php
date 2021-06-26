@@ -1,47 +1,10 @@
 <?php 
 require_once "../config.php";
-//VARIABEL UNTUK MENYIMPAN PESAN (VALIDASI)
-// $namaErr = $alamatErr = $jkErr= $hpErr = $agmErr = $jbtnErr;
 
-//JIKA MENGIRIMKAN DATA DENGAN NAME "SAVE" (TOMBOL SAVE TELAH DI KLIK)
 if(!empty($_POST)){
     // var_dump($_POST); 
     // var_dump($_FILES);
     // die;
-    //JIKA DATA ADA YANG KOSONG
-    // if( !isset($_POST['nama_pegawai']) || 
-    //     !isset($_POST['alamat_pegawai']) || 
-    //     !isset($_POST['jenis_kelamin']) ||
-    //     !isset($_POST['hp_pegawai']) ||
-    //     !isset($_POST['agama']) ||
-    //     !isset($_POST['jabatan_pegawai']) ||
-    //     !isset($_POST['tanggal_masuk']) ||
-    //     !isset($_POST['foto'])){
-
-    //     if($_POST['nama_pegawai'] == ""){
-    //         $namaErr = "Nama tidak boleh kosong!";
-    //     }
-    //     if($_POST['alamat_pegawai'] == ""){
-    //         $alamatErr = "alamat tidak boleh kosong!";
-    //     }
-    //     if($_POST['jenis_kelamin'] == ""){
-    //         $jkErr = "Jenis Kelamin tidak boleh kosong!";
-    //     }
-    //     if($_POST['hp_pegawai'] == ""){
-    //         $hpErr = "No handphone tidak boleh kosong!";
-    //     }
-    //     if($_POST['agama'] == ""){
-    //         $agmErr = "Agama tidak boleh kosong!";
-    //     }
-    //     if($_POST['jabatan_pegawai'] == ""){
-    //         $jbtnErr = "Jabatan tidak boleh kosong!";
-    //     }
-    //     if($_POST['tanggal_masuk'] == ""){
-    //         $tglErr = "Tanggal tidak boleh kosong!";
-    //     }
-        
-    // }else{
-        //SELAIN DATA ADA YANG KOSONG (BERARTI SEMUA FORM TERISI)
         $ekstensi_diperbolehkan = array('png', 'jpg', 'jpeg');
         $nama_gambar =$_FILES['file_foto']['name'];
         $x = explode('.', $nama_gambar);
@@ -91,5 +54,5 @@ if(!empty($_POST)){
                 //     </script>";
                 // }
         }
-        
+        $_SESSION["sukses"] = 'Data Berhasil Disimpan';
  ?>
