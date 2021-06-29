@@ -1,3 +1,6 @@
+<?php 
+   include "config.php";
+   if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -135,3 +138,6 @@
 </body>
 
 </html>
+<?php }else{
+	header("Location: index.php");
+} ?>

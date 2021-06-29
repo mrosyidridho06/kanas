@@ -5,7 +5,7 @@ require_once("configlogin.php");
 if(isset($_POST['register'])){
 
     // filter data yang diinputkan
-    $name = filter_input(INPUT_POST, 'nama_user', FILTER_SANITIZE_STRING);
+    $name = filter_input(INPUT_POST, 'nama', FILTER_SANITIZE_STRING);
     $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
     // enkripsi password
     $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
@@ -13,13 +13,13 @@ if(isset($_POST['register'])){
 
 
     // menyiapkan query
-    $sql = "INSERT INTO tb_users (nama_user, username, password, email) 
-            VALUES (:nama_user, :username, :password, :email)";
+    $sql = "INSERT INTO tb_user (nama, username, email, password) 
+            VALUES (:nama, :username, :email, :password)";
     $stmt = $db->prepare($sql);
 
     // bind parameter ke query
     $params = array(
-        ":nama_user" => $name,
+        ":nama" => $name,
         ":username" => $username,
         ":password" => $password,
         ":email" => $email
@@ -43,7 +43,7 @@ if(isset($_POST['register'])){
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Register Pesbuk</title>
 
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css" />
 </head>
 <body class="bg-light">
 
@@ -59,8 +59,8 @@ if(isset($_POST['register'])){
         <form action="" method="POST">
 
             <div class="form-group">
-                <label for="nama_user">Nama Lengkap</label>
-                <input class="form-control" type="text" name="nama_user" placeholder="Nama kamu" />
+                <label for="name">Nama Lengkap</label>
+                <input class="form-control" type="text" name="nama" placeholder="Nama kamu" />
             </div>
 
             <div class="form-group">

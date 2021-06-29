@@ -1,4 +1,6 @@
-<?php require_once "config.php"; ?>
+<?php 
+require_once "config.php"; 
+if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,7 +64,7 @@
         <i class="fas fa-fw fa-cube"></i>
         <span>Resep</span></a>
     </li>
-
+    <?php if ($_SESSION['role'] == 'admin') {?>
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
             aria-expanded="true" aria-controls="collapsePages">
@@ -82,7 +84,8 @@
             </div>
         </div>
     </li>
-
+    <?php }else { ?>
+      <?php } ?>
     <!-- Nav Item - Pegawai -->
     <li class="nav-item">
       <a class="nav-link" href="<?=base_url()?>/pegawai/pegawai.php">
@@ -96,7 +99,7 @@
         <i class="fas fa-fw fa-id-badge"></i>
         <span>Supplier</span></a>
     </li>
-
+    
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 
@@ -165,11 +168,13 @@
           <!-- Nav Item - User Information -->
           <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin</span>
+              <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?=$_SESSION['nama']?></span>
               <img class="img-profile rounded-circle" src="<?=base_url()?>/assets/img/pesanlokal-com-kanaskitchen-logo-aLgOa7-removebg-preview.png">
             </a>
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+              <p class="text-muted text-center">Role: <?=$_SESSION['role']?></p>
+              <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="#">
                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                 Profile
@@ -242,7 +247,7 @@
       <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
       <div class="modal-footer">
         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-        <a class="btn btn-primary" href="../index.php">Logout</a>
+        <a class="btn btn-primary" href="<?=base_url()?>/logout.php">Logout</a>
       </div>
     </div>
   </div>
@@ -253,3 +258,6 @@
 <!-- Custom scripts for all pages-->
 <script src="<?=base_url()?>/assets/js/sb-admin-2.min.js"></script>
 </html>
+<?php }else{
+	header("Location: index.php");
+} ?>
