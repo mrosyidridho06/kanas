@@ -38,11 +38,11 @@
 }
 
 .navigation-clean .navbar-collapse, .navigation-clean .form-inline {
-  border-top-color: #ddd;
+  border-top-color:rgb(0, 0, 0);
 }
 
 .navigation-clean.navbar-light .navbar-nav .nav-link.active, .navigation-clean.navbar-light .navbar-nav .nav-link.active:focus, .navigation-clean.navbar-light .navbar-nav .nav-link.active:hover {
-  color: #8f8f8f;
+  color: rgb(0, 0, 0);
   box-shadow: none;
   background: none;
   pointer-events: none;
@@ -65,7 +65,7 @@
 .navigation-clean .navbar-nav > li > .dropdown-menu {
   margin-top: -5px;
   box-shadow: none;
-  background-color: #fff;
+  background-color: rgb(0, 0, 0);
   border-radius: 2px;
 }
 
@@ -75,7 +75,7 @@
 }
 
 .navigation-clean .dropdown-menu .dropdown-item:focus, .navigation-clean .dropdown-menu .dropdown-item:hover {
-  background: #eee;
+  background: rgb(0, 0, 0);
   color: inherit;
 }
 

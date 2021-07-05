@@ -2,7 +2,7 @@
 session_start();  
 include "config.php";
 
-if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['role'])) {
+if (isset($_POST['username']) && isset($_POST['password'])) {
 
 	function test_input($data) {
 	  $data = trim($data);
@@ -13,7 +13,7 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['role
 
 	$username = test_input($_POST['username']);
 	$password = test_input($_POST['password']);
-	$role = test_input($_POST['role']);
+	// $role = test_input($_POST['role']);
 
 	if (empty($username)) {
 		header("Location: login.php?error=User Name is Required");
@@ -30,7 +30,7 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['role
         if (mysqli_num_rows($result) === 1) {
         	// the user name must be unique
         	$row = mysqli_fetch_assoc($result);
-        	if ($row['password'] === $password && $row['role'] == $role) {
+        	if ($row['password'] === $password) {
         		$_SESSION['nama'] = $row['nama'];
         		$_SESSION['id'] = $row['id'];
         		$_SESSION['role'] = $row['role'];

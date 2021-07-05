@@ -1,3 +1,7 @@
+<?php 
+require_once "../config.php"; 
+if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
+<?php if ($_SESSION['role'] == 'admin') {?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -112,6 +116,11 @@
     <footer class="footer-basic" style="background: var(--light);">
         <p class="copyright">Company Name © 2021</p>
     </footer>
+    <?php }else { ?>
+        <div>
+        <a href="../dashboard.php">Kembali</a>
+        </div>
+        <?php } ?>
 </body>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <!-- <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script> -->
@@ -160,3 +169,9 @@
         </script>
     <!-- jangan lupa untuk menambahkan unset agar sweet alert tidak muncul lagi saat di refresh -->
     <?php unset($_SESSION['sukses']); } ?>
+
+    
+
+<?php }else{
+    header("Location: dashboard.php");
+} ?>

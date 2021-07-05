@@ -19,8 +19,9 @@
       	      style="width: 450px;">
       	      <h1 class="text-center p-3">LOGIN</h1>
       	      <?php if (isset($_GET['error'])) { ?>
-      	      <div class="alert alert-danger" role="alert">
+      	      <div class="alert alert-danger alert-dismissible" role="alert">
 				  <?=$_GET['error']?>
+				<!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
 			  </div>
 			  <?php } ?>
 		  <div class="mb-3">
@@ -39,7 +40,7 @@
 		           class="form-control" 
 		           id="password">
 		  </div>
-		  <div class="mb-1">
+		  <!-- <div class="mb-1">
 		    <label class="form-label">Select User Type:</label>
 		  </div>
 		  <select class="form-select mb-3"
@@ -47,7 +48,7 @@
 		          aria-label="Default select example">
 			  <option selected value="user">User</option>
 			  <option value="admin">Admin</option>
-		  </select>
+		  </select> -->
 		 
 		  <button type="submit" 
 		          class="btn btn-primary">LOGIN</button>

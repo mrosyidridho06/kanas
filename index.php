@@ -31,7 +31,9 @@ if(isset($_SESSION['user'])){
 <body>
     <header class="header-blue" style="color: #222222;background: var(--light);border-style: none;opacity: 1;">
         <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search" style="color: #222222;">
-            <div class="container-fluid"><a class="navbar-brand" href="#"><img src="assets/img/pesanlokal-com-kanaskitchen-logo-aLgOa7-removebg-preview.png" style="height: 54px;">Kana's Kitchen</a><button data-toggle="collapse" class="navbar-toggler btn btn-light" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="container-fluid">
+            <a class="navbar-brand" href=""><img src="assets/img/pesanlokal-com-kanaskitchen-logo-aLgOa7-removebg-preview.png" style="height: 54px;">Kana's Kitchen</a>
+            <button data-toggle="collapse" data-target="#navcol-1" class="navbar-toggler" style="background: #bebebe;border-color: rgba(0,0,0,0);"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navcol-1">
                     <ul class="navbar-nav">
                         <li class="nav-item"><a class="nav-link" href="dashboard.php" style="border-color: rgb(34,34,34);color: rgb(34,34,34);">Toko</a></li>
