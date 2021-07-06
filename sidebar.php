@@ -73,14 +73,11 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
         </a>
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Gaji</h6>
-                <a class="collapse-item" href="login.html">Login</a>
-                <a class="collapse-item" href="register.html">Register</a>
-                <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
+                <h6 class="collapse-header">Penggajian</h6>
+                <a class="collapse-item" href="gaji.php">Gaji</a>
                 <div class="collapse-divider"></div>
                 <h6 class="collapse-header">Pegawai</h6>
-                <a class="collapse-item" href="">Hari</a>
-                <a class="collapse-item" href="blank.html">Blank Page</a>
+                <a class="collapse-item" href="total-hari.php">Total Hari</a>
             </div>
         </div>
     </li>
@@ -259,5 +256,5 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
 <script src="<?=base_url()?>/assets/js/sb-admin-2.min.js"></script>
 </html>
 <?php }else{
-	header("Location: index.php");
+	header("Location: ../index.php");
 } ?>

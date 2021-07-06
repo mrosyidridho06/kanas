@@ -117,9 +117,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
         <p class="copyright">Company Name © 2021</p>
     </footer>
     <?php }else { ?>
-        <div>
-        <a href="../dashboard.php">Kembali</a>
-        </div>
+        <script>window.location="../dashboard.php"</script>
         <?php } ?>
 </body>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
