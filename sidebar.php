@@ -74,10 +74,10 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Penggajian</h6>
-                <a class="collapse-item" href="gaji.php">Gaji</a>
+                <a class="collapse-item" href="<?=base_url()?>/hr/gaji.php">Gaji</a>
                 <div class="collapse-divider"></div>
                 <h6 class="collapse-header">Pegawai</h6>
-                <a class="collapse-item" href="total-hari.php">Total Hari</a>
+                <a class="collapse-item" href="<?=base_url()?>/hr/kehadiran.php">Kehadiran</a>
             </div>
         </div>
     </li>
