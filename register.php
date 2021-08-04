@@ -7,14 +7,14 @@ if(isset($_POST['register'])){
     // filter data yang diinputkan
     $name = filter_input(INPUT_POST, 'nama', FILTER_SANITIZE_STRING);
     $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
-    // enkripsi password
-    $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
+    $password = md5($_POST["password"]);
     $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+    $role = filter_input(INPUT_POST, 'role', FILTER_SANITIZE_STRING);
 
 
     // menyiapkan query
-    $sql = "INSERT INTO tb_user (nama, username, email, password) 
-            VALUES (:nama, :username, :email, :password)";
+    $sql = "INSERT INTO tb_user (nama, username, email, password, role) 
+            VALUES (:nama, :username, :email, :password, :role)";
     $stmt = $db->prepare($sql);
 
     // bind parameter ke query
@@ -22,7 +22,8 @@ if(isset($_POST['register'])){
         ":nama" => $name,
         ":username" => $username,
         ":password" => $password,
-        ":email" => $email
+        ":email" => $email,
+        ":role" => $role
     );
 
     // eksekusi query untuk menyimpan ke database
@@ -65,7 +66,7 @@ if(isset($_POST['register'])){
 
             <div class="form-group">
                 <label for="username">Username</label>
-                <input class="form-control" type="text" name="username" placeholder="Username" />
+                <input class="form-control" type="text" name="username" id="username" placeholder="Username" /><span class="hasil-username"></span>
             </div>
 
             <div class="form-group">
@@ -76,6 +77,18 @@ if(isset($_POST['register'])){
             <div class="form-group">
                 <label for="password">Password</label>
                 <input class="form-control" type="password" name="password" placeholder="Password" />
+            </div>
+
+            <div class="form-group">
+                <label for="role">Role</label>
+                <select class="form-select mb-3"
+		                name="role" 
+		                aria-label="Default select example">
+                    <option selected value="user">User</option>
+                    <option value="admin">Admin</option>
+                    <option value="pemilik">Pemilik</option>
+                </select>
+                <!-- <input class="form-control" type="text" name="role" placeholder="role" /> -->
             </div>
 
             <input type="submit" class="btn btn-success btn-block" name="register" value="Daftar" />
@@ -92,4 +105,21 @@ if(isset($_POST['register'])){
 </div>
 
 </body>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 </html>
+<script>
+$(document).ready(function() {
+ $('#username').change(function() {  // Jika terjadi perubahan pada id email
+      var username = $(this).val(); // Ciptakan variabel email untuk menampung alamat email yang diinputkan
+      $.ajax({ // Lakukan pengiriman data dengan Ajax
+         type: 'POST', // dengan tipe pengiriman POST
+          url: 'cekmail.php', // dan kirimkan prosesnya ke file cek-email.php
+         data: 'username=' + username,  // datanya ialah data email
+            
+            success: function(response) { // Jika berhasil
+              $('.hasil-username').html(response); // Tampilkan pesan ke class hasil-email
+         }
+       });
+    });
+});
+</script>

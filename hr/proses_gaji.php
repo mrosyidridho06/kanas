@@ -8,13 +8,15 @@ if(!empty($_POST))
     $bpjs = mysqli_real_escape_string($conn, $_POST["tun_bpjs"]);
     $bonus = mysqli_real_escape_string($conn, $_POST["bonus"]);
     $lembur = mysqli_real_escape_string($conn, $_POST["jumlah_lembur"]);
+    $potongan = mysqli_real_escape_string($conn, $_POST["potongan"]);
 
 
     $upah_harian = $jmlh_hari*50000;
     $uang_lembur = $lembur*10000;
+    $pot = $potongan;
 
-    $total_gaji = ($uang_lembur+$upah_harian+$bpjs+$bonus); 
-    $query = "INSERT INTO tb_gaji VALUES('', '$name', '$tgl','$upah_harian', '$jmlh_hari', '$bpjs', '$bonus', '$lembur', '$total_gaji')";
+    $total_gaji = ($uang_lembur+$upah_harian+$bpjs+$bonus-$pot); 
+    $query = "INSERT INTO tb_gaji VALUES('', '$name', '$tgl','$upah_harian', '$jmlh_hari', '$bpjs', '$bonus', '$lembur','$potongan','$total_gaji')";
     $sql = mysqli_query($conn, $query);
     if( $sql ) {
         // kalau berhasil alihkan ke halaman list-siswa.php

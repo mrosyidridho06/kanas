@@ -64,7 +64,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
         <i class="fas fa-fw fa-cube"></i>
         <span>Resep</span></a>
     </li>
-    <?php if ($_SESSION['role'] == 'admin') {?>
+    
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
             aria-expanded="true" aria-controls="collapsePages">
@@ -73,15 +73,18 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
         </a>
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
+                <?php if ($_SESSION['role'] == 'admin') {?>
                 <h6 class="collapse-header">Penggajian</h6>
                 <a class="collapse-item" href="<?=base_url()?>/hr/gaji.php">Gaji</a>
                 <div class="collapse-divider"></div>
+                <?php }else { ?>
+                <?php } ?>
                 <h6 class="collapse-header">Pegawai</h6>
                 <a class="collapse-item" href="<?=base_url()?>/hr/kehadiran.php">Kehadiran</a>
             </div>
         </div>
     </li>
-    
+    <?php if ($_SESSION['role'] == 'admin') {?>
     <!-- Nav Item - Pegawai -->
     <li class="nav-item">
       <a class="nav-link" href="<?=base_url()?>/pegawai/pegawai.php">

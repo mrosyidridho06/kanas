@@ -1,6 +1,9 @@
-<?php
-include "../config.php";
-?>
+<?php 
+require_once "../config.php"; 
+if(!isset($_SESSION)){
+    session_start();
+}
+if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -72,38 +75,39 @@ include "../config.php";
                                 <th>Jabatan</th>
                                 <th>Masuk</th>
                                 <th>Izin</th>
-                                <th>Alpa</th>
                                 <th>Lembur</th>
-                                <th>Potongan</th>
                             </thead>
                         </tr>
                         <?php
-                        $sql = mysqli_query($conn, "SELECT * FROM master_gaji INNER JOIN tb_pegawai ON master_gaji.id_pegawai = tb_pegawai.id_pegawai");
-                        // $sql = mysqli_query($conn, "SELECT master_gaji.masuk, master_gaji.sakit, master_gaji.izin, master_gaji.alpha, master_gaji.lembur, master_gaji.potongan FROM master_gaji INNER JOIN  tb_pegawai ON master_gaji.id_pegawai=tb_pegawai.nama_pegawai WHERE master_gaji.bulan=$bulantahun ORDER BY tb_pegawai.id_pegawai ASC");
+                        $sql = mysqli_query($conn, "SELECT * FROM tb_kehadiran INNER JOIN tb_pegawai ON tb_kehadiran.id_pegawai = tb_pegawai.id_pegawai");
+                        // $sql = mysqli_query($conn, "SELECT tb_kehadiran.masuk, tb_kehadiran.sakit, tb_kehadiran.izin, tb_kehadiran.alpha, tb_kehadiran.lembur, tb_kehadiran.potongan FROM tb_kehadiran INNER JOIN  tb_pegawai ON tb_kehadiran.id_pegawai=tb_pegawai.nama_pegawai WHERE tb_kehadiran.bulan=$bulantahun ORDER BY tb_pegawai.id_pegawai ASC");
                         // var_dump ($sql);
                         $no=1;
-                        if(isset($_POST['filter'])){
+                        if(!isset($_POST['filter'])){
+                            echo "<div class=\"alert alert-primary\" role=\"alert\">
+                                <strong> Silahkan Pilih Tanggal Periode</strong>
+                                </div>";
+                            mysqli_error($conn);
+                            exit();
+                        }else{
                             $dari_tanggal = mysqli_real_escape_string($conn, $_POST['dari_tanggal']);
                             $sampai_tanggal = mysqli_real_escape_string($conn, $_POST['sampai_tanggal']);
-                            $data_hadir = mysqli_query($conn, "SELECT * FROM master_gaji INNER JOIN tb_pegawai ON master_gaji.id_pegawai = tb_pegawai.id_pegawai WHERE tanggal BETWEEN '$dari_tanggal' AND '$sampai_tanggal'");
-                        }else{
-                            echo "isi tanggal";
-                        }
-                        while($data=mysqli_fetch_array($data_hadir)){
-                            ?>
-                            <tr>
-                                <td><?= $no++ ?></td>
-                                <td><?= $data['nama_pegawai'] ?></td>
-                                <td><?= $data['jabatan_pegawai'] ?></td>
-                                <td><?= $data['masuk'] ?></td>
-                                <td><?= $data['izin'] ?></td>
-                                <td><?= $data['alpha'] ?></td>
-                                <td><?= $data['lembur'] ?></td>
-                                <td><?= $data['potongan'] ?></td>
-                            </tr>
-                        <?php
+                            $data_hadir = mysqli_query($conn, "SELECT * FROM tb_kehadiran INNER JOIN tb_pegawai ON tb_kehadiran.id_pegawai = tb_pegawai.id_pegawai WHERE tanggal BETWEEN '$dari_tanggal' AND '$sampai_tanggal'");
+                            while($data=mysqli_fetch_array($data_hadir)){
+                                ?>
+                                <tr>
+                                    <td><?= $no++ ?></td>
+                                    <td><?= $data['nama_pegawai'] ?></td>
+                                    <td><?= $data['jabatan_pegawai'] ?></td>
+                                    <td><?= $data['masuk'] ?></td>
+                                    <td><?= $data['izin'] ?></td>
+                                    <td><?= $data['lembur'] ?></td>
+                                </tr>
+                            <?php
+                            }
                         }
                         ?>
+                       
                     </table>
                 </div>
             </div>
@@ -138,17 +142,8 @@ include "../config.php";
         <label>Izin</label>
         <input type="number" name="izin" class="form-control"></input>
         <br>
-        <label>Sakit</label>
-        <input type="number" name="sakit" class="form-control"></input>
-        <br>
-        <label>Alpha</label>
-        <input type="number" name="alpa" class="form-control"></input>
-        <br>
         <label>lembur</label>
         <input type="number" name="jumlah_lembur" id="lembur" class="form-control"></input>
-        <br>
-        <label>Potongan</label>
-        <input type="number" name="potongan" id="lembur" class="form-control"></input>
         <br>
         <input type="submit" name="insert" id="insert" value="Insert" class="btn btn-success" />
         </form>
@@ -167,3 +162,7 @@ include "../config.php";
     <!-- <script src="<?=base_url()?>/assets/DataTables/dataTables.min.js"></script> -->
     <script src="<?=base_url()?>/assets/DataTables/DataTables-1.10.24/js/dataTables.bootstrap4.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<?php }else{
+    header("Location: ../index.php");
+} ?>

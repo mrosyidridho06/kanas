@@ -38,28 +38,29 @@ $table = 'tb_gaji';
 // EOT;
  
 // Table's primary key
-$primaryKey = 'id';
+$primaryKey = 'id_penggajian';
  
 // Array of database columns which should be read and sent back to DataTables.
 // The `db` parameter represents the column name in the database, while the `dt`
 // parameter represents the DataTables column identifier. In this case simple
 // indexes
 
-$joinQuery = "FROM `{$table}` AS `c` INNER JOIN `master_gaji` AS `cn` ON (`c`.`id_gaji` = `cn`.`id_gaji`) INNER JOIN `tb_pegawai` AS cb ON (`cn`.`id_pegawai` = `cb`.`id_pegawai`)";
+$joinQuery = "FROM `{$table}` AS `c` INNER JOIN `tb_kehadiran` AS `cn` ON (`c`.`id_kehadiran` = `cn`.`id_kehadiran`) INNER JOIN `tb_pegawai` AS cb ON (`cn`.`id_pegawai` = `cb`.`id_pegawai`)";
 
 
 $columns = array(
     array( 'db' => '`cb`.`nama_pegawai`', 'dt' => 0, 'field' => 'nama_pegawai', 'as' => 'nama_pegawai' ),
     array( 'db' => '`c`.`tanggal`',  'dt' => 1, 'field' => 'tanggal'),
     array( 'db' => '`c`.`jumlah_hari`',   'dt' => 2, 'field' => 'jumlah_hari' ),
-    array( 'db' => '`c`.`bpjs`',     'dt' => 3, 'field' => 'bpjs' ),
-    array( 'db' => '`c`.`bonus`',     'dt' => 4, 'field' => 'bonus' ),
+    array( 'db' => '`c`.`bpjs`',     'dt' => 3, 'formatter' => function($d, $row){return 'Rp. '.number_format($d);}, 'field' => 'bpjs' ),
+    array( 'db' => '`c`.`bonus`',     'dt' => 4, 'formatter' => function($d, $row){return 'Rp. '.number_format($d);}, 'field' => 'bonus' ),
     array( 'db' => '`c`.`lembur`',     'dt' => 5, 'field' => 'lembur' ),
-    array( 'db' => '`c`.`gaji_harian`',  'dt' => 6, 'field' => 'gaji_harian'),
-    array( 'db' => '`c`.`total_gaji`',     'dt' => 7, 'formatter' => function( $d, $row ) {
+    array( 'db' => '`c`.`gaji_harian`',  'dt' => 6, 'formatter' => function($d, $row){return 'Rp. '.number_format($d);}, 'field' => 'gaji_harian'),
+    array( 'db' => '`c`.`potongan`',  'dt' => 7, 'formatter' => function($d, $row){return 'Rp. '.number_format($d);}, 'field' => 'potongan'),
+    array( 'db' => '`c`.`total_gaji`',     'dt' => 8, 'formatter' => function( $d, $row ) {
                     return 'Rp. '.number_format($d);
                 }, 'field' => 'total_gaji' ),
-    array( 'db' => '`c`.`id`',     'dt' => 8, 'field' => 'id' ),
+    array( 'db' => '`c`.`id_penggajian`',     'dt' => 9, 'field' => 'id_penggajian' ),
 
     // array( 'db' => 'nama_barang', 'dt' => 0 ),
     // array( 'db' => 'nama_supplier',  'dt' => 1 ),

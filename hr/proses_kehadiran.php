@@ -7,12 +7,9 @@ if(!empty($_POST))
     $jab = mysqli_real_escape_string($conn, $_POST["jabatan"]);    
     $jmlh_hari = mysqli_real_escape_string($conn, $_POST["masuk"]);
     $izin = mysqli_real_escape_string($conn, $_POST["izin"]);
-    $sakit = mysqli_real_escape_string($conn, $_POST["sakit"]);
-    $alpa = mysqli_real_escape_string($conn, $_POST["alpa"]);
     $lembur = mysqli_real_escape_string($conn, $_POST["jumlah_lembur"]);
-    $pot = mysqli_real_escape_string($conn, $_POST["potongan"]);
 
-    $query = "INSERT INTO master_gaji VALUES('', '$name', '$jmlh_hari', '$sakit', '$izin',  '$alpa', '$lembur', '$pot', '$tgl')";
+    $query = "INSERT INTO tb_kehadiran VALUES('', '$name', '$jmlh_hari', '$izin', '$lembur', '$tgl')";
     $sql = mysqli_query($conn, $query);
     if( $sql ) {
         // kalau berhasil alihkan ke halaman list-siswa.php
@@ -20,7 +17,7 @@ if(!empty($_POST))
     } else {
         // kalau gagal tampilkan pesan
         die("Gagal menyimpan perubahan...");
-        echo "<a href='kehadiran.php'>Kembali Ke Halaman Supplier</a>";
+        echo "<div><a href='kehadiran.php'>Kembali Ke Halaman kehadiran</a></div>";
     }
 }
 else {

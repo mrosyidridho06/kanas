@@ -1,3 +1,7 @@
+<?php 
+require_once "../config.php"; 
+if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
+<?php if ($_SESSION['role'] == 'admin') {?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,15 +9,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gaji Pegawai</title>
+    <link rel="stylesheet" href="../assets/DataTables/DataTables-1.10.24/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="../assets/DataTables/Button-1.7.0/css/buttons.bootstrap4.min.css">
+    <script src="../assets/DataTables/jQuery-3.3.1/jquery-3.3.1.js"></script>
+    <script src="../assets/DataTables/DataTables-1.10.24/js/jquery.dataTables.min.js"></script>
 </head>
 <body>
     <?php include "../sidebar.php"?>
     <div class="container">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Bahan Baku</h1>
+            <h1 class="h3 mb-0 text-gray-800">Penggajian</h1>
             <div align="right" class="pt-1">
                 <a href="" class="btn btn-success btn-xs"><i class="fa fa-refresh"></i></a>
-                <button type="button" name="age" id="age" data-toggle="modal" data-target="#add_data_Modal" class="btn btn-primary"><i class="fa fa-plus"> Tambah Bahan</i></button>
+                <button type="button" name="age" id="age" data-toggle="modal" data-target="#add_data_Modal" class="btn btn-primary"><i class="fa fa-plus"> Tambah Gaji</i></button>
             </div>
         </div>
         <div class="card shadow mb-4">
@@ -30,6 +38,7 @@
                             <th scope="row">Bonus</th>
                             <th scope="row">Lembur</th>
                             <th scope="row">Gaji Pokok</th>
+                            <th scope="row">Potongan</th>
                             <th scope="row">Total Gaji</th>
                             <th colspan="2" class="text-center">Edit</th>
                         </tr>
@@ -56,14 +65,14 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
     </div>
     <div class="modal-body">
-        <form method="post" id="insert_form" action="proses.php">
+        <form method="post" id="insert_form" action="proses_gaji.php">
         <label>Nama Karyawan</label>
         <select class="form-control" name="nama_karyawan" id="gaji" required>
             <option value="" selected="">Pilih Karyawan</option>
             <?php
-            $sql_kar = mysqli_query($conn, "SELECT * FROM master_gaji INNER JOIN tb_pegawai ON master_gaji.id_pegawai = tb_pegawai.id_pegawai") or die (mysqli_error($conn));
+            $sql_kar = mysqli_query($conn, "SELECT * FROM tb_kehadiran INNER JOIN tb_pegawai ON tb_kehadiran.id_pegawai = tb_pegawai.id_pegawai") or die (mysqli_error($conn));
             while($data_kar = mysqli_fetch_array($sql_kar)){
-                echo '<option value="'.$data_kar['id_gaji'].'">'.$data_kar['nama_pegawai'].'</option>';
+                echo '<option value="'.$data_kar['id_kehadiran'].'">'.$data_kar['nama_pegawai'].'</option>';
             } ?>
         </select>
         <br />
@@ -72,11 +81,11 @@
         <br>
         <!-- <label>BPJS</label>
             <?php
-                $sql_kar = mysqli_query($conn, "SELECT * FROM master_gaji") or die (mysqli_error($conn));
+                $sql_kar = mysqli_query($conn, "SELECT * FROM tb_kehadiran") or die (mysqli_error($conn));
                 while($data_kar = mysqli_fetch_array($sql_kar)){
-                    echo '<option value="'.$data_kar['id_gaji'].'">'.$data_kar['masuk'].'</option>';
+                    echo '<option value="'.$data_kar['id_kehadiran'].'">'.$data_kar['masuk'].'</option>';
             } ?> -->
-        <label > Jumlah Hari</label>
+        <label>Jumlah Hari</label>
         <input type="number" name="jumlah_hari" class="form-control" id="jmlh_hari" readonly></input>
         <br>
         <label>BPJS</label>
@@ -87,6 +96,9 @@
         <br>
         <label>lembur</label>
         <input type="number" name="jumlah_lembur" id="lembur" class="form-control" readonly></input>
+        <br>
+        <label>Potongan</label>
+        <input type="number" name="potongan" class="form-control"></input>
         <br>
         <input type="submit" name="insert" id="insert" value="Insert" class="btn btn-success" />
         </form>
@@ -156,7 +168,7 @@
             $('#tb_gaji').DataTable( {
                 "processing": false,
                 "serverSide": true,
-                "rowId": 'id',
+                "rowId": 'id_penggajian',
                 "ajax": "get_gaji.php",
                 // dom: 'Bftrip',
                 // button: [
@@ -173,7 +185,7 @@
                     {
                         "searchable" : false,
                         "orderable" : false,
-                        "targets" : 8,
+                        "targets" : 9,
                         "render" : function(data, type, row) {
                             var btn = "<center><a href=\"edit.php?id="+data+"\"><span class=\"fa fa-edit\"></span></a><a href=\"delete.php?id="+data+"\" onclick=\"return confirm('Yakin Mau dihapus')\"class=\"pl-4\"><i class=\"fa fa-trash\"></i></a></center>";
                             return btn;
@@ -185,4 +197,10 @@
         } );
     </script>
 </body>
+    <?php }else { ?>
+        <script>window.location="../dashboard.php"</script>
+    <?php } ?>
 </html>
+<?php }else{
+    header("Location: ../dashboard.php");
+} ?>

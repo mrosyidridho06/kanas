@@ -1,3 +1,9 @@
+<?php 
+include_once "../config.php";
+if(!isset($_SESSION)){
+    session_start();
+}
+if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -238,3 +244,6 @@
     <!-- jangan lupa untuk menambahkan unset agar sweet alert tidak muncul lagi saat di refresh -->
     <?php unset($_SESSION['hapus']); } ?>
 </html>
+<?php }else{
+	header("Location: ../index.php");
+} ?>
