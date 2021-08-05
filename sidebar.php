@@ -51,20 +51,23 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
         <span>Dashboard</span></a>
     </li>
 
+    <?php if ($_SESSION['role'] == 'user' || $_SESSION['role'] == 'pemilik') {?>
     <!-- Nav Item - Bahan -->
     <li class="nav-item">
       <a class="nav-link" href="<?=base_url()?>/bahan/bahan.php">
         <i class="fas fa-fw fa-cubes"></i>
         <span>Bahan</span></a>
     </li>
-
     <!-- Nav Item - Resep -->
     <li class="nav-item">
       <a class="nav-link" href="<?=base_url()?>/resep/resep.php">
         <i class="fas fa-fw fa-cube"></i>
         <span>Resep</span></a>
     </li>
-    
+    <?php }else { ?>
+    <?php } ?>
+
+    <?php if ($_SESSION['role'] == 'pemilik') {?> 
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
             aria-expanded="true" aria-controls="collapsePages">
@@ -73,18 +76,21 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
         </a>
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <?php if ($_SESSION['role'] == 'admin') {?>
-                <h6 class="collapse-header">Penggajian</h6>
+            <h6 class="collapse-header">Penggajian</h6>
                 <a class="collapse-item" href="<?=base_url()?>/hr/gaji.php">Gaji</a>
                 <div class="collapse-divider"></div>
-                <?php }else { ?>
-                <?php } ?>
+                <?php if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'pemilik') {?>
                 <h6 class="collapse-header">Pegawai</h6>
                 <a class="collapse-item" href="<?=base_url()?>/hr/kehadiran.php">Kehadiran</a>
             </div>
+            <?php }else { ?>
+    <?php } ?>
         </div>
     </li>
-    <?php if ($_SESSION['role'] == 'admin') {?>
+    
+    <?php }else { ?>
+    <?php } ?>
+    <?php if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'pemilik') {?>
     <!-- Nav Item - Pegawai -->
     <li class="nav-item">
       <a class="nav-link" href="<?=base_url()?>/pegawai/pegawai.php">
@@ -93,12 +99,16 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
     </li>
     <?php }else { ?>
       <?php } ?>
+
+    <?php if ($_SESSION['role'] == 'user' || $_SESSION['role'] == 'pemilik') {?>
     <!-- Nav Item - Supplier -->
     <li class="nav-item">
       <a class="nav-link" href="<?=base_url()?>/supplier/supplier.php">
         <i class="fas fa-fw fa-id-badge"></i>
         <span>Supplier</span></a>
     </li>
+    <?php }else { ?>
+      <?php } ?>
     
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">

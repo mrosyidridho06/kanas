@@ -4,6 +4,7 @@ if(!isset($_SESSION)){
     session_start();
 }
 if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
+<?php if ($_SESSION['role'] == 'user' || $_SESSION['role'] == 'pemilik'){?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -243,6 +244,9 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
         </script>
     <!-- jangan lupa untuk menambahkan unset agar sweet alert tidak muncul lagi saat di refresh -->
     <?php unset($_SESSION['hapus']); } ?>
+    <?php }else { ?>
+        <script>window.location="../dashboard.php"</script>
+        <?php } ?>
 </html>
 <?php }else{
 	header("Location: ../index.php");

@@ -1,7 +1,10 @@
 <?php 
-require_once "../config.php"; 
+require_once "../config.php";
+if(!isset($_SESSION)){
+    session_start();
+} 
 if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
-<?php if ($_SESSION['role'] == 'admin') {?>
+<?php if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'pemilik') {?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,19 +12,9 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Pegawai</title>
-    <!-- <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700">
     <link rel="stylesheet" href="../assets/DataTables/DataTables-1.10.24/css/dataTables.bootstrap4.min.css">
-    <!-- <link rel="stylesheet" href="../assets/DataTables/Button-1.7.0/css/buttons.bootstrap4.min.css"> -->
-    <!-- <script src="../assets/DataTables/jQuery-3.3.1/jquery-3.3.1.js"></script> -->
-    <!-- <script src="../assets/DataTables/DataTables-1.10.24/js/jquery.dataTables.min.js"></script> -->
-    <!-- <link rel="stylesheet" href="../assets/fonts/font-awesome.min.css"> -->
-    <!-- <link rel="stylesheet" href="../assets/css/Contact-Form-Clean.css"> -->
-    <!-- <link rel="stylesheet" href="../assets/css/Navigation-Clean.css"> -->
-    <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css"> -->
-
-
 </head>
 
 <body>

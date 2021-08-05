@@ -1,7 +1,7 @@
 <?php 
 require_once "../config.php"; 
 if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
-<?php if ($_SESSION['role'] == 'admin') {?>
+<?php if ($_SESSION['role'] === 'pemilik') {?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

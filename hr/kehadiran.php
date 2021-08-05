@@ -4,6 +4,8 @@ if(!isset($_SESSION)){
     session_start();
 }
 if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
+<?php if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'pemilik'){?>
+    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -154,6 +156,9 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
     </div>
     </div>
     </div>
+    <?php }else { ?>
+        <script>window.location="../dashboard.php"</script>
+        <?php } ?>
 </html>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
