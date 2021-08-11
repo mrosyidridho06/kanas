@@ -6,7 +6,7 @@ if(!empty($_POST)){
     // var_dump($_FILES);
     // die;
         $ekstensi_diperbolehkan = array('png', 'jpg', 'jpeg');
-        $nama_gambar =$_FILES['file_foto']['name'];
+        $nama_gambar =rand(0,9999).$_FILES['file_foto']['name'];
         $x = explode('.', $nama_gambar);
         $ekstensi = strtolower(end($x));
         $ukuran = $_FILES['file_foto']['size'];

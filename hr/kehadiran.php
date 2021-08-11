@@ -17,100 +17,96 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
 <body>
 <?php include "../sidebar.php"?>
     <div class="container">
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Kehadiran Pegawai</h1>
             <div align="right" class="pt-1">
                 <a href="" class="btn btn-success btn-xs"><i class="fa fa-refresh"></i></a>
                 <button type="button" name="age" id="age" data-toggle="modal" data-target="#add_data_Modal" class="btn btn-primary"><i class="fa fa-plus"> Tambah Kehadiran</i></button>
             </div>
         </div>
-            <div class="card shadow mb-4">
-                <div class="card-body">
-                    <form class="form-inline mb-4" action="" method="POST">
-                            <label class="font-weight-bold">Dari</label>
-                            <input type="date" name="dari_tanggal" class="form-control mb-2 mr-sm-2" required>
-                            <br>
-                            <label class="font-weight-bold">Sampai</label>
-                            <input type="date" name="sampai_tanggal" class="form-control mb-2 mr-sm-2" required>
-                            <input type="submit" class="btn btn-primary" name="filter" value="Filter">
-                </form>
-                    <!-- <form action="" method="GET" class="form-inline mb-4">
-                        <div class="input-group mb-2 mr-sm-2">
-                            <label class="px-2 font-weight-bold">Bulan</label>
-                            <select name="bulan" class="form-control">
-                                <option value="">-- Pilih --</option>
-                                <option value="01">Januari</option>
-                                <option value="02">Februari</option>
-                                <option value="03">Maret</option>
-                                <option value="04">April</option>
-                                <option value="05">Mei</option>
-                                <option value="06">Juni</option>
-                                <option value="07">Juli</option>
-                                <option value="08">Agustus</option>
-                                <option value="09">September</option>
-                                <option value="10">Oktober</option>
-                                <option value="11">November</option>
-                                <option value="12">Desember</option>
-                            </select>
+    <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <div class="card mt-2">
+                        <div class="card-body">
+                            <form action="" method="GET">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>From Date</label>
+                                            <input type="date" name="from_date" value="<?php if(isset($_GET['from_date'])){ echo $_GET['from_date']; } ?>" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>To Date</label>
+                                            <input type="date" name="to_date" value="<?php if(isset($_GET['to_date'])){ echo $_GET['to_date']; } ?>" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Click to Filter</label> <br>
+                                        <button type="submit" class="btn btn-primary">Filter</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-                        <div class="input-group mb-2 mr-sm-2">
-                            <label class="px-2 font-weight-bold">Tahun</label>
-                            <select name="tahun" class="form-control">
-                                <option value="">-- Pilih --</option>
+                    </div>
+
+                    <div class="card mt-4">
+                        <div class="card-body">
+                            <table class="table table-borderd">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nama Pegawai</th>
+                                        <th>Jabatan</th>
+                                        <th>Masuk</th>
+                                        <th>Izin</th>
+                                        <th>Lembur</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                
                                 <?php 
-                                $qry=mysqli_query($conn, "SELECT tanggal FROM master_gaji GROUP BY year(tanggal)");
-                                while($t=mysqli_Fetch_array($qry)){
-                                    $data = explode('-',$t['tanggal']);
-                                    $tahun = $data[0];
-                                    echo "<option value='$tahun'>$tahun</option>";
-                                }
+                                require_once('../config.php');
+                                    // $con = mysqli_connect("localhost","root","","nodemcu_test1");
+
+                                    if(isset($_GET['from_date']) && isset($_GET['to_date']))
+                                    {
+                                        $from_date = $_GET['from_date'];
+                                        $to_date = $_GET['to_date'];
+                                        $no=1;
+
+                                        $query = "SELECT * FROM tb_kehadiran INNER JOIN tb_pegawai ON tb_kehadiran.id_pegawai = tb_pegawai.id_pegawai WHERE tanggal BETWEEN '$from_date' AND '$to_date' ";
+                                        $query_run = mysqli_query($conn, $query);
+
+                                        if(mysqli_num_rows($query_run) > 0)
+                                        {
+                                            foreach($query_run as $row)
+                                            {
+                                                ?>
+                                                <tr>
+                                                    <td><?= $no++; ?></td>
+                                                    <td><?= $row['nama_pegawai']; ?></td>
+                                                    <td><?= $row['jabatan_pegawai']; ?></td>
+                                                    <td><?= $row['masuk']; ?></td>
+                                                    <td><?= $row['izin']; ?></td>
+                                                    <td><?= $row['lembur']; ?></td>
+                                                </tr>
+                                                <?php
+                                            }
+                                        }
+                                        else
+                                        {
+                                            echo "No Record Found";
+                                        }
+                                    }
                                 ?>
-                            </select>
+                                </tbody>
+                            </table>
                         </div>
-                        <button type="submit" name="filter" class="btn btn-primary mb-2">Tampilkan</button>
-                    </form> -->
-                    <table class="table table-hover">
-                        <tr>
-                            <thead>
-                                <th>No</th>
-                                <th>Nama</th>
-                                <th>Jabatan</th>
-                                <th>Masuk</th>
-                                <th>Izin</th>
-                                <th>Lembur</th>
-                            </thead>
-                        </tr>
-                        <?php
-                        $sql = mysqli_query($conn, "SELECT * FROM tb_kehadiran INNER JOIN tb_pegawai ON tb_kehadiran.id_pegawai = tb_pegawai.id_pegawai");
-                        // $sql = mysqli_query($conn, "SELECT tb_kehadiran.masuk, tb_kehadiran.sakit, tb_kehadiran.izin, tb_kehadiran.alpha, tb_kehadiran.lembur, tb_kehadiran.potongan FROM tb_kehadiran INNER JOIN  tb_pegawai ON tb_kehadiran.id_pegawai=tb_pegawai.nama_pegawai WHERE tb_kehadiran.bulan=$bulantahun ORDER BY tb_pegawai.id_pegawai ASC");
-                        // var_dump ($sql);
-                        $no=1;
-                        if(!isset($_POST['filter'])){
-                            echo "<div class=\"alert alert-primary\" role=\"alert\">
-                                <strong> Silahkan Pilih Tanggal Periode</strong>
-                                </div>";
-                            mysqli_error($conn);
-                            exit();
-                        }else{
-                            $dari_tanggal = mysqli_real_escape_string($conn, $_POST['dari_tanggal']);
-                            $sampai_tanggal = mysqli_real_escape_string($conn, $_POST['sampai_tanggal']);
-                            $data_hadir = mysqli_query($conn, "SELECT * FROM tb_kehadiran INNER JOIN tb_pegawai ON tb_kehadiran.id_pegawai = tb_pegawai.id_pegawai WHERE tanggal BETWEEN '$dari_tanggal' AND '$sampai_tanggal'");
-                            while($data=mysqli_fetch_array($data_hadir)){
-                                ?>
-                                <tr>
-                                    <td><?= $no++ ?></td>
-                                    <td><?= $data['nama_pegawai'] ?></td>
-                                    <td><?= $data['jabatan_pegawai'] ?></td>
-                                    <td><?= $data['masuk'] ?></td>
-                                    <td><?= $data['izin'] ?></td>
-                                    <td><?= $data['lembur'] ?></td>
-                                </tr>
-                            <?php
-                            }
-                        }
-                        ?>
-                       
-                    </table>
+                    </div>
                 </div>
             </div>
     </div>

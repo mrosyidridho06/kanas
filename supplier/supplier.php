@@ -54,63 +54,60 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
 <!-- Modals Tambah data -->
 <div id="add_data_Modal" class="modal fade">
     <div class="modal-dialog">
-    <div class="modal-content">
-    <div class="modal-header">
-        <h4 class="modal-title">Input Supplier</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Input Supplier</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+                <div class="modal-body">
+                    <form method="post" id="insert_form" action="aksi.php">
+                        <label>Nama Supplier</label>
+                        <input type="text" name="nama_supplier" id="nama_supplier" class="form-control" required />
+                        <br />
+                        <label>Alamat Supplier</label>
+                        <textarea name="alamat_supplier" id="alamat_supplier" class="form-control" required></textarea>
+                        <br />
+                        <br />  
+                        <label>Nomor Handphone</label>
+                        <input type="text" name="hp_supplier" id="hp_supplier" class="form-control" required />
+                        <br />
+                        <input type="submit" name="insert" id="insert" value="Insert" class="btn btn-success" />
+                    </form>
+                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
     </div>
-    <div class="modal-body">
-        <form method="post" id="insert_form" action="aksi.php">
-        <label>Nama Supplier</label>
-        <input type="text" name="nama_supplier" id="nama_supplier" class="form-control" required />
-        <br />
-        <label>Alamat Supplier</label>
-        <textarea name="alamat_supplier" id="alamat_supplier" class="form-control" required></textarea>
-        <br />
-        <br />  
-        <label>Nomor Handphone</label>
-        <input type="text" name="hp_supplier" id="hp_supplier" class="form-control" required />
-        <br />
-        <input type="submit" name="insert" id="insert" value="Insert" class="btn btn-success" />
-    
-        </form>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-    </div>
-    </div>
-    </div>
-    </div>
+</div>
     <!-- Modals Edit -->
     <div id="editModal" class="modal fade">
-    <div class="modal-dialog">
-    <div class="modal-content">
-    <div class="modal-header">
-        <h4 class="modal-title">Edit Data Supplier</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-    </div>
-    <div class="modal-body" id="form_edit">
-    <form method="post" id="edit_form" action="edit.php">
-        <label>Nama Supplier</label>
-        <input type="text" name="nama_supplier" id="nama_supplier" class="form-control" required />
-        <br />
-        <label>Alamat Supplier</label>
-        <textarea name="alamat_supplier" id="alamat_supplier" class="form-control" required></textarea>
-        <br />
-        <br />  
-        <label>Nomor Handphone</label>
-        <input type="text" name="hp_supplier" id="hp_supplier" class="form-control" />
-        <br />
-        <input type="submit" name="insert" id="insert" value="Insert" class="btn btn-success" />
-    
-        </form>
-        
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-    </div>
-    </div>
-    </div>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit Data Supplier</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body" id="form_edit">
+                    <form method="post" id="edit_form" action="edit.php">
+                        <label>Nama Supplier</label>
+                        <input type="text" name="nama_supplier" id="nama_supplier" class="form-control" required />
+                        <br />
+                        <label>Alamat Supplier</label>
+                        <textarea name="alamat_supplier" id="alamat_supplier" class="form-control" required></textarea>
+                        <br />
+                        <br />  
+                        <label>Nomor Handphone</label>
+                            <input type="text" name="hp_supplier" id="hp_supplier" class="form-control" />
+                            <br />
+                            <input type="submit" name="insert" id="insert" value="Insert" class="btn btn-success" />
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
 
 
@@ -127,24 +124,13 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
                 "serverSide": true,
                 "rowId": 'id',
                 "ajax": "data_supp.php",
-                // dom: 'Bftrip',
-                // button: [
-                //     {
-                //         extend :'pdf',
-                //         oriented :'potrait',
-                //         pageSize : 'Legal',
-                //         title : 'Daftar Bahan',
-                //         download : 'open'
-                //     },
-                //     'csv', 'excel', 'print', 'copy'
-                // ],
                 columnDefs : [
                     {
                         "searchable" : false,
                         "orderable" : false,
                         "targets" : 3,
                         "render" : function(data, type, row) {
-                            var btn = "<center><a href=\"edit.php\" id='editModal' data-toggle='modal' data-target='#editModal'><span class=\"fa fa-edit\"></span></a><a href=\"delete.php?id="+data+"\" onclick=\"return confirm('Yakin Mau dihapus')\"class=\"pl-4\"><i class=\"fa fa-trash\"></i></a></center>";
+                            var btn = "<center><a href=\"edit.php\" \"id='editModal' data-toggle='modal' data-target='#editModal'\"><span class=\"fa fa-edit\"></span></a><a href=\"delete.php?id="+data+"\" onclick=\"return confirm('Yakin Mau dihapus')\"class=\"pl-4\"><i class=\"fa fa-trash\"></i></a></center>";
                             return btn;
                         }
                     }
@@ -156,8 +142,8 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
     <script>
     $(document).ready(function(){
         // edit
-        $(document).on('click', '.edit_data', function(){
-        var id = $(this).attr("id_supplier");
+        $(document).on('click', '#editModal', function(){
+        var id = $(this).attr("id");
         $.ajax({
         url:"edit.php",
         method:"POST",

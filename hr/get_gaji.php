@@ -52,11 +52,11 @@ $columns = array(
     array( 'db' => '`cb`.`nama_pegawai`', 'dt' => 0, 'field' => 'nama_pegawai', 'as' => 'nama_pegawai' ),
     array( 'db' => '`c`.`tanggal`',  'dt' => 1, 'field' => 'tanggal'),
     array( 'db' => '`c`.`jumlah_hari`',   'dt' => 2, 'field' => 'jumlah_hari' ),
-    array( 'db' => '`c`.`bpjs`',     'dt' => 3, 'formatter' => function($d, $row){return 'Rp. '.number_format($d);}, 'field' => 'bpjs' ),
-    array( 'db' => '`c`.`bonus`',     'dt' => 4, 'formatter' => function($d, $row){return 'Rp. '.number_format($d);}, 'field' => 'bonus' ),
+    array( 'db' => '`c`.`bpjs`',     'dt' => 3, 'formatter' => function($d, $row){return 'Rp. '.number_format($d,0,',','.');}, 'field' => 'bpjs' ),
+    array( 'db' => '`c`.`bonus`',     'dt' => 4, 'formatter' => function($d, $row){return 'Rp. '.number_format($d,0,',','.');}, 'field' => 'bonus' ),
     array( 'db' => '`c`.`lembur`',     'dt' => 5, 'field' => 'lembur' ),
-    array( 'db' => '`c`.`gaji_harian`',  'dt' => 6, 'formatter' => function($d, $row){return 'Rp. '.number_format($d);}, 'field' => 'gaji_harian'),
-    array( 'db' => '`c`.`potongan`',  'dt' => 7, 'formatter' => function($d, $row){return 'Rp. '.number_format($d);}, 'field' => 'potongan'),
+    array( 'db' => '`c`.`gaji_harian`',  'dt' => 6, 'formatter' => function($d, $row){return 'Rp. '.number_format($d,0,',','.');}, 'field' => 'gaji_harian'),
+    array( 'db' => '`c`.`potongan`',  'dt' => 7, 'formatter' => function($d, $row){return 'Rp. '.number_format($d,0,',','.');}, 'field' => 'potongan'),
     array( 'db' => '`c`.`total_gaji`',     'dt' => 8, 'formatter' => function( $d, $row ) {
                     return 'Rp. '.number_format($d);
                 }, 'field' => 'total_gaji' ),

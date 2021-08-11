@@ -15,9 +15,11 @@
         $data_barang = mysqli_query($conn, "SELECT * FROM tb_bahan");
         $data_peg = mysqli_query($conn, "SELECT * FROM tb_pegawai");
         $data_sup = mysqli_query($conn, "SELECT * FROM tb_supplier");
+        $data_resep = mysqli_query($conn, "SELECT * FROM tb_resep");
         $jumlahbah = mysqli_num_rows($data_barang);
         $jumlahpeg = mysqli_num_rows($data_peg);
         $jumlahsup = mysqli_num_rows($data_sup);
+        $jumlahresep = mysqli_num_rows($data_resep);
     ?>
     
     <div class="container-fluid">
@@ -30,6 +32,7 @@
             <!-- Earnings (Monthly) Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card border-left-primary shadow h-100 py-2">
+                <a href="<?=base_url()?>/bahan/bahan.php">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
@@ -42,12 +45,14 @@
                             </div>
                         </div>
                     </div>
+                </a>
                 </div>
             </div>
             
             <!-- Earnings (Monthly) Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card border-left-primary shadow h-100 py-2">
+                    <a href="<?=base_url()?>/supplier/supplier.php">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
@@ -60,22 +65,25 @@
                             </div>
                         </div>
                     </div>
+                    </a>
                 </div>
             </div>
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card border-left-primary shadow h-100 py-2">
+                <a href="<?=base_url()?>/resep/resep.php">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                     Jumlah Resep</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $jumlahsup;?></div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $jumlahresep;?></div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-cube fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
+                </a>
                 </div>
             </div>
             <?php }else { ?>
@@ -83,6 +91,7 @@
             <?php if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'pemilik') {?>
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card border-left-primary shadow h-100 py-2">
+                <a href="<?=base_url()?>/pegawai/pegawai.php">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
@@ -95,6 +104,7 @@
                             </div>
                         </div>
                     </div>
+                </a>
                 </div>
             </div>
             <?php }else { ?>
@@ -105,5 +115,5 @@
 
 </html>
 <?php }else{
-	header("Location: index.php");
+	header("Location: login.php");
 } ?>

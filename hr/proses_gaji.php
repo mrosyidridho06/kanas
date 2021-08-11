@@ -16,7 +16,7 @@ if(!empty($_POST))
     $pot = $potongan;
 
     $total_gaji = ($uang_lembur+$upah_harian+$bpjs+$bonus-$pot); 
-    $query = "INSERT INTO tb_gaji VALUES('', '$name', '$tgl','$upah_harian', '$jmlh_hari', '$bpjs', '$bonus', '$lembur','$potongan','$total_gaji')";
+    $query = "INSERT INTO tb_gaji (id_penggajian, id_kehadiran, tanggal, gaji_harian, jumlah_hari, bpjs, bonus, lembur, potongan, total_gaji) VALUES('0', '$name', '$tgl','$upah_harian', '$jmlh_hari', '$bpjs', '$bonus', '$lembur','$potongan','$total_gaji')";
     $sql = mysqli_query($conn, $query);
     if( $sql ) {
         // kalau berhasil alihkan ke halaman list-siswa.php

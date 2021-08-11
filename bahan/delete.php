@@ -8,7 +8,7 @@
  
 	// query sql
 	$sql = "DELETE FROM tb_bahan WHERE id_bahan='$idh'";
-	$query = mysqli_query($conn, $sql) or die (mysqli_error());
+	$query = mysqli_query($conn, $sql) or die (mysqli_error($conn));
  
 	if($query){
         header("Location: bahan.php");

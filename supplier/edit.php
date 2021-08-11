@@ -33,7 +33,7 @@ if(isset($_POST["id"]))
 {
  $output = '';
  require_once "../config.php";
- $query = "SELECT * FROM tb_supplier WHERE id = '".$_POST["supplier_id"]."'";
+ $query = "SELECT * FROM tb_supplier WHERE id = '".$_POST["id_supplier"]."'";
  $result = mysqli_query($conn, $query);
 }
 ?>

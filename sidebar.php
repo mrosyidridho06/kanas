@@ -58,26 +58,44 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
         <i class="fas fa-fw fa-cubes"></i>
         <span>Bahan</span></a>
     </li>
+    <?php }else { ?>
+    <?php } ?>
+
     <!-- Nav Item - Resep -->
+    <?php if ($_SESSION['role'] == 'pemilik' || $_SESSION['role'] == 'user') {?> 
     <li class="nav-item">
-      <a class="nav-link" href="<?=base_url()?>/resep/resep.php">
-        <i class="fas fa-fw fa-cube"></i>
-        <span>Resep</span></a>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+            aria-expanded="true" aria-controls="collapsePages">
+            <i class="fas fa-fw fa-cube"></i>
+            <span>Resep Management</span>
+        </a>
+        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Resep</h6>
+                <a class="collapse-item" href="<?=base_url()?>/resep/resep.php">Tambah Resep</a>
+                <div class="collapse-divider"></div>
+                <a class="collapse-item" href="<?=base_url()?>/resep/resep_details.php">Daftar Resep</a>
+            </div>
+        </div>
     </li>
     <?php }else { ?>
     <?php } ?>
 
-    <?php if ($_SESSION['role'] == 'pemilik') {?> 
+    <?php if ($_SESSION['role'] == 'pemilik' || $_SESSION['role'] == 'admin') {?> 
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
             aria-expanded="true" aria-controls="collapsePages">
             <i class="fas fa-fw fa-folder"></i>
             <span>HR Management</span>
         </a>
+        
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
+            <?php if ($_SESSION['role'] == 'pemilik') {?> 
             <h6 class="collapse-header">Penggajian</h6>
                 <a class="collapse-item" href="<?=base_url()?>/hr/gaji.php">Gaji</a>
+                <?php }else { ?>
+                  <?php } ?>
                 <div class="collapse-divider"></div>
                 <?php if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'pemilik') {?>
                 <h6 class="collapse-header">Pegawai</h6>
@@ -87,9 +105,10 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
     <?php } ?>
         </div>
     </li>
-    
     <?php }else { ?>
     <?php } ?>
+    
+    
     <?php if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'pemilik') {?>
     <!-- Nav Item - Pegawai -->
     <li class="nav-item">

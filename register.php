@@ -1,6 +1,7 @@
 <?php
 
 require_once("configlogin.php");
+session_start();
 
 if(isset($_POST['register'])){
 

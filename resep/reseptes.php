@@ -12,7 +12,7 @@ if(isset($_POST["add_to_cart"]))
 			$item_array = array(
 				'item_id'			=>	$_GET["id"],
 				'item_nama'			=>	$_POST["hidden_nama"],
-                'item_satuan'			=>	$_POST["hidden_satuan"],
+                'item_satuan'		=>	$_POST["hidden_satuan"],
 				'item_harga'		=>	$_POST["hidden_harga"],
 				'item_quantity'		=>	$_POST["quantity"]
 			);
@@ -28,7 +28,7 @@ if(isset($_POST["add_to_cart"]))
 		$item_array = array(
 			'item_id'			=>	$_GET["id"],
 			'item_nama'			=>	$_POST["hidden_nama"],
-            'item_satuan'			=>	$_POST["hidden_satuan"],
+            'item_satuan'		=>	$_POST["hidden_satuan"],
 			'item_harga'		=>	$_POST["hidden_harga"],
 			'item_quantity'		=>	$_POST["quantity"]
 		);

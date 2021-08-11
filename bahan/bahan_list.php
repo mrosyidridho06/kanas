@@ -54,7 +54,7 @@ $columns = array(
     array( 'db' => '`c`.`jumlah_barang`',   'dt' => 2, 'field' => 'jumlah_barang' ),
     array( 'db' => '`c`.`satuan`',     'dt' => 3, 'field' => 'satuan' ),
     array( 'db' => '`c`.`harga_barang`',     'dt' => 4, 'formatter' => function( $d, $row ) {
-                    return 'Rp.' .number_format($d);
+                    return 'Rp.' .number_format($d,0,',','.');
                 }, 'field' => 'harga_barang' ),
     array( 'db' => '`c`.`waktu`',     'dt' => 5, 'field' => 'waktu' ),
     array( 'db' => '`c`.`id_bahan`',     'dt' => 6, 'field' => 'id_bahan' ),

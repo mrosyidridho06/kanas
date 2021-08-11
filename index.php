@@ -1,8 +1,3 @@
-<?php include_once('config.php');
-if(isset($_SESSION['user'])){
-    echo "<script>window.location='".base_url()."';</scirpt>";
-} else{
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -130,6 +125,3 @@ if(isset($_SESSION['user'])){
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
-<?php
-}
-?>
