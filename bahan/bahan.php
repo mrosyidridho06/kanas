@@ -1,8 +1,5 @@
 <?php 
 include_once "../config.php";
-if(!isset($_SESSION)){
-    session_start();
-}
 if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
 <?php if ($_SESSION['role'] == 'user' || $_SESSION['role'] == 'pemilik'){?>
 <!DOCTYPE html>
@@ -29,6 +26,34 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
                 <button type="button" name="age" id="age" data-toggle="modal" data-target="#add_data_Modal" class="btn btn-primary"><i class="fa fa-plus"> Tambah Bahan</i></button>
             </div>
         </div>
+        <?php 
+        if(isset($_SESSION['update']))
+        {
+            ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <?php echo $_SESSION['update']; ?>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <?php
+        unset($_SESSION['update']);
+        }
+        ?>
+        <?php 
+        if(isset($_SESSION['delete']))
+        {
+            ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <?php echo $_SESSION['delete']; ?>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <?php
+        unset($_SESSION['delete']);
+        }
+        ?>
         <div class="card shadow mb-4">
             <div class="card-body">
                 <div class="table-responsive">
@@ -242,12 +267,12 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
             }
         })
         </script>
+</html>
     <!-- jangan lupa untuk menambahkan unset agar sweet alert tidak muncul lagi saat di refresh -->
     <?php unset($_SESSION['hapus']); } ?>
     <?php }else { ?>
         <script>window.location="../dashboard.php"</script>
         <?php } ?>
-</html>
 <?php }else{
 	header("Location: ../index.php");
 } ?>

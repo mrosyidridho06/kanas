@@ -32,12 +32,12 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
                         <tr>
                             <!-- <th>No.</th> -->
                             <th scope="row">Nama</th>
-                            <th scope="row">Tanggal Priode</th>
+                            <th scope="row">Tanggal Pembayaran</th>
                             <th scope="row">Jumlah Kehadiran</th>
                             <th scope="row">BPJS</th>
                             <th scope="row">Bonus</th>
                             <th scope="row">Lembur</th>
-                            <th scope="row">Gaji Pokok</th>
+                            <th scope="row">Gaji Harian</th>
                             <th scope="row">Potongan</th>
                             <th scope="row">Total Gaji</th>
                             <th colspan="2" class="text-center">Edit</th>
@@ -76,7 +76,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
             } ?>
         </select>
         <br />
-        <label>Tanggal</label>
+        <label>Tanggal Pembayaran</label>
         <input type="date" name="tanggal_priode" class="form-control"></input>
         <br>
         <!-- <label>BPJS</label>
@@ -88,6 +88,9 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
         <label>Jumlah Hari</label>
         <input type="number" name="jumlah_hari" class="form-control" id="jmlh_hari" readonly></input>
         <br>
+        <label>Gaji Harian</label>
+        <input type="number" name="gaji_harian" class="form-control"></input>
+        <br>
         <label>BPJS</label>
         <input type="number" name="tun_bpjs" class="form-control"></input>
         <br>
@@ -97,39 +100,13 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
         <label>lembur</label>
         <input type="number" name="jumlah_lembur" id="lembur" class="form-control" readonly></input>
         <br>
+        <label>Upah lembur</label>
+        <input type="number" name="uang_lembur" id="uang_lembur" class="form-control"></input>
+        <br>
         <label>Potongan</label>
         <input type="number" name="potongan" class="form-control"></input>
         <br>
         <input type="submit" name="insert" id="insert" value="Insert" class="btn btn-success" />
-        </form>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-    </div>
-    </div>
-    </div>
-    </div>
-    <!-- Modals Edit -->
-    <div id="editModal" class="modal fade">
-    <div class="modal-dialog">
-    <div class="modal-content">
-    <div class="modal-header">
-        <h4 class="modal-title">Edit Data Supplier</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-    </div>
-    <div class="modal-body" id="form_edit">
-        <form class="shadow" action="update.php" method="post">
-            <label>Nama Barang</label>
-            <div class="form-group" style="margin: 1px;padding: 0px;padding-bottom: 6px;"><input type="hidden" name="id_bahan" value="<?php echo $bahan['id_bahan']; ?>"><input class="form-control" type="text" name="nama_barang" value="<?php echo $bahan['nama_barang']; ?>"></div>
-            <div class="form-group" style="margin: 1px;padding: 0px;padding-bottom: 6px;"><label>Supplier</label><input class="form-control" type="text" name="nama_supplier" value="<?php echo $bahan['nama_supplier']; ?>" disabled></div>
-            <div class="form-group" style="margin: 1px;padding: 0px;padding-bottom: 6px;"><label>Jumlah Barang</label><input class="form-control" type="text" name="jumlah_barang" value="<?php echo $bahan['jumlah_barang']; ?>"></div>
-            <div class="form-group" style="margin: 1px;padding: 0px;padding-bottom: 6px;"><label for="satuan">Satuan</label><?php $satuan = $bahan['satuan']; ?><select class="form-control" name="satuan">
-                    <option <?php echo ($satuan == 'Gram') ? "selected": "" ?>>Gram</option>
-                    <option <?php echo ($satuan == 'Pcs') ? "selected": "" ?>>Pcs</option>
-                    <option <?php echo ($satuan == 'mL') ? "selected": "" ?>>mL</option>
-            </select></div>
-            <div class="form-group" style="margin: 1px;padding: 0px;padding-bottom: 6px;"><label>Harga</label><input class="form-control" type="text" name="harga_barang" value="<?php echo $bahan['harga_barang']; ?>"></div>
-            <div class="form-group" style="text-align: right;"><input class="btn btn-primary" name="save" value="save" type="submit"></input></div>
         </form>
     </div>
     <div class="modal-footer">
@@ -187,7 +164,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
                         "orderable" : false,
                         "targets" : 9,
                         "render" : function(data, type, row) {
-                            var btn = "<center><a href=\"edit.php?id="+data+"\"><span class=\"fa fa-edit\"></span></a><a href=\"delete.php?id="+data+"\" onclick=\"return confirm('Yakin Mau dihapus')\"class=\"pl-4\"><i class=\"fa fa-trash\"></i></a></center>";
+                            var btn = "<center><a href=\"gaji_print.php?id="+data+"\"target='_blank'\"><span class=\"fa fa-print\"></span></a><a href=\"delete.php?id="+data+"\" onclick=\"return confirm('Yakin Mau dihapus')\"class=\"pl-4\"><i class=\"fa fa-trash\"></i></a></center>";
                             return btn;
                         }
                     }

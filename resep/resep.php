@@ -1,6 +1,8 @@
 <?php 
-include_once "../config.php";
-
+include"../config.php";
+if(!isset($_SESSION)){
+    session_start();
+}
 $sum = 0;
 if(!empty($_SESSION['cart']))
 {
@@ -9,10 +11,6 @@ if(!empty($_SESSION['cart']))
     }
 }
 
-
-if(!isset($_SESSION)){
-    session_start();
-}
 if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
 <?php if ($_SESSION['role'] == 'user' || $_SESSION['role'] == 'pemilik'){?>
 <!DOCTYPE html>
@@ -57,9 +55,6 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
                 <h3>Resep Details</h3>
                 <form action="tambah_resep.php" method="post" class="form-inline my-4">
                     <input type="hidden" name="total" value="<?=$sum?>">
-                    <div class="form-group">
-                        <input type="text" name="koderesep" placeholder="Kode Resep" class="form-control" required>
-                    </div>
                     <div class="form-group mx-2">
                         <input type="text" name="namaresep" placeholder="Nama Resep" class="form-control" required>
                     </div>
@@ -114,10 +109,10 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
         });
     </script>
 </body>
+</html>
 <?php }else { ?>
         <script>window.location="../dashboard.php"</script>
 <?php } ?>
-</html>
 <?php }else{
 	header("Location: ../index.php");
 } ?>

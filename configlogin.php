@@ -1,9 +1,9 @@
 <?php
 
 $db_host = "localhost";
-$db_user = "root";
-$db_pass = "";
-$db_name = "kanas";
+$db_user = "id17427729_kanas";
+$db_pass = "dW/Ff7RS7%-@1Hfh";
+$db_name = "id17427729_kanaskitchen";
 
 try {    
     //create PDO connection 

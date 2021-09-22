@@ -39,9 +39,6 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
             <th class="text-center">RESEP</th>
         </tr>
         <tr>
-            <td align="left">Kode: <?=$resep['kode_resep']?></td>
-        </tr>
-        <tr>
             <td align="left">Nama: <?=$resep['nama_resep']?></td>
         </tr>
     </table>

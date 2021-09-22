@@ -1,16 +1,15 @@
 <?php
-require_once "../config.php";
+include "../config.php";
 if(!empty($_POST))
 {
     $name = mysqli_real_escape_string($conn, $_POST["nama_karyawan"]);  
     $tgl = mysqli_real_escape_string($conn, $_POST["tanggal_priode"]);
-    $jab = mysqli_real_escape_string($conn, $_POST["jabatan"]);    
     $jmlh_hari = mysqli_real_escape_string($conn, $_POST["masuk"]);
     $izin = mysqli_real_escape_string($conn, $_POST["izin"]);
     $lembur = mysqli_real_escape_string($conn, $_POST["jumlah_lembur"]);
 
-    $query = "INSERT INTO tb_kehadiran VALUES('', '$name', '$jmlh_hari', '$izin', '$lembur', '$tgl')";
-    $sql = mysqli_query($conn, $query);
+    $query = "INSERT INTO tb_kehadiran (id_kehadiran, id_pegawai, masuk, izin, lembur, tanggal) VALUES('0', '$name', '$jmlh_hari', '$izin', '$lembur', '$tgl')";
+    $sql = mysqli_query($conn, $query) or die (mysqli_error($conn));
     if( $sql ) {
         // kalau berhasil alihkan ke halaman list-siswa.php
         header( 'Location: kehadiran.php' );

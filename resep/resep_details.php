@@ -32,10 +32,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
                     <thead>
                         <tr>
                             <!-- <th>No.</th> -->
-                            <th scope="row">Kode Resep</th>
                             <th scope="row">Nama Resep</th>
-                            <th scope="row">Total</th>
-                            <th scope="row">Tanggal</th>
                             <th colspan="2" class="text-center">Edit</th>
                         </tr>
                     </thead>
@@ -81,7 +78,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
                     {
                         "searchable" : false,
                         "orderable" : false,
-                        "targets" : 4,
+                        "targets" : 1,
                         "render" : function(data, type, row) {
                             var btn = "<center><a href=\"resep_print.php?idresep="+data+"\ \"target='_blank'\"><span class=\"fa fa-print\"></span></a><a href=\"delete_resep.php?id="+data+"\" onclick=\"return confirm('Yakin Mau dihapus')\"class=\"pl-4\"><i class=\"fa fa-trash\"></i></a></center>";
                             return btn;

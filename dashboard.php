@@ -23,6 +23,20 @@
     ?>
     
     <div class="container-fluid">
+        <?php 
+        if(isset($_SESSION['sukses']))
+        {
+            ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <?php echo $_SESSION['sukses']; ?>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <?php
+        unset($_SESSION['sukses']);
+        }
+        ?>
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
@@ -70,7 +84,7 @@
             </div>
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card border-left-primary shadow h-100 py-2">
-                <a href="<?=base_url()?>/resep/resep.php">
+                <a href="<?=base_url()?>/resep/resep_details.php">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
@@ -110,6 +124,7 @@
             <?php }else { ?>
             <?php } ?>
         </div>
+        <embed type="application/pdf" src="Panduan Website Kanas.pdf" width="1100" height="1000"></embed>
     </div>
 </body>
 

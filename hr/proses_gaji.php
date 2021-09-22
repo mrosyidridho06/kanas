@@ -5,14 +5,16 @@ if(!empty($_POST))
     $name = mysqli_real_escape_string($conn, $_POST["nama_karyawan"]);  
     $tgl = mysqli_real_escape_string($conn, $_POST["tanggal_priode"]);    
     $jmlh_hari = mysqli_real_escape_string($conn, $_POST["jumlah_hari"]);
+    $gajihari = mysqli_real_escape_string($conn, $_POST["gaji_harian"]);
     $bpjs = mysqli_real_escape_string($conn, $_POST["tun_bpjs"]);
     $bonus = mysqli_real_escape_string($conn, $_POST["bonus"]);
     $lembur = mysqli_real_escape_string($conn, $_POST["jumlah_lembur"]);
+    $uanglembur = mysqli_real_escape_string($conn, $_POST["uang_lembur"]);
     $potongan = mysqli_real_escape_string($conn, $_POST["potongan"]);
 
 
-    $upah_harian = $jmlh_hari*50000;
-    $uang_lembur = $lembur*10000;
+    $upah_harian = $jmlh_hari*$gajihari;
+    $uang_lembur = $lembur*$uanglembur;
     $pot = $potongan;
 
     $total_gaji = ($uang_lembur+$upah_harian+$bpjs+$bonus-$pot); 

@@ -7,19 +7,15 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="<?=base_url()?>/assets/img/pesanlokal-com-kanaskitchen-logo-aLgOa7-removebg-preview.png"/>
     <link rel="stylesheet" href="<?=base_url()?>/assets/css/sb-admin-2.min.css">
     <link rel="stylesheet" href="<?=base_url()?>/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora">
     <link rel="stylesheet" href="<?=base_url()?>/assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="<?=base_url()?>/assets/fonts/ionicons.min.css">
-    <link rel="stylesheet" href="<?=base_url()?>/assets/css/Contact-Form-Clean.css">
     <link rel="stylesheet" href="<?=base_url()?>/assets/css/Footer-Basic.css">
     <link rel="stylesheet" href="<?=base_url()?>/assets/css/Footer-Clean.css">
-    <link rel="stylesheet" href="<?=base_url()?>/assets/css/Header-Blue.css">
-    <link rel="stylesheet" href="<?=base_url()?>/assets/css/Map-Clean.css">
-    <link rel="stylesheet" href="<?=base_url()?>/assets/css/Navigation-Clean.css">
-    <link rel="stylesheet" href="<?=base_url()?>/assets/css/Pretty-Registration-Form.css">
     <!-- Custom fonts for this template -->
     <link href="<?=base_url()?>/assets/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -64,12 +60,12 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
     <!-- Nav Item - Resep -->
     <?php if ($_SESSION['role'] == 'pemilik' || $_SESSION['role'] == 'user') {?> 
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-            aria-expanded="true" aria-controls="collapsePages">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseResep"
+            aria-expanded="true" aria-controls="collapseResep">
             <i class="fas fa-fw fa-cube"></i>
             <span>Resep Management</span>
         </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div id="collapseResep" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Resep</h6>
                 <a class="collapse-item" href="<?=base_url()?>/resep/resep.php">Tambah Resep</a>
@@ -204,18 +200,21 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
               <p class="text-muted text-center">Role: <?=$_SESSION['role']?></p>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="<?=base_url()?>/profile.php">
                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                 Profile
               </a>
-              <a class="dropdown-item" href="#">
-                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                Settings
+            <?php if ($_SESSION['role'] == 'pemilik') {?> 
+              <a class="dropdown-item" href="<?=base_url()?>/register.php">
+                <i class="fas fa-user-plus fa-sm fa-fw mr-2 text-gray-400"></i>
+                Tambah User
               </a>
-              <a class="dropdown-item" href="#">
-                <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                Activity Log
-              </a>
+            <?php }else { ?>
+            <?php } ?>
+            <a class="dropdown-item" href="<?=base_url()?>/reset.php">
+                <i class="fas fa-lock fa-sm fa-fw mr-2 text-gray-400"></i>
+                Ganti Password
+            </a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -282,10 +281,14 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
   </div>
 </div>
 </body>
-<script src="<?=base_url()?>/assets/js/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="<?=base_url()?>/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- Custom scripts for all pages-->
 <script src="<?=base_url()?>/assets/js/sb-admin-2.min.js"></script>
+<script src="<?=base_url()?>/assets/DataTables/Buttons-1.7.0/js/dataTables.buttons.min.js"></script>
+<script src="<?=base_url()?>/assets/DataTables/DataTables-1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="<?=base_url()?>/assets/DataTables/DataTables-1.10.24/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </html>
 <?php }else{
 	header("Location: ../index.php");

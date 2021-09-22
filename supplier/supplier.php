@@ -27,6 +27,48 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
                 <button type="button" name="age" id="age" data-toggle="modal" data-target="#add_data_Modal" class="btn btn-primary"><i class="fa fa-plus"> Tambah Supplier</i></button>
             </div>
         </div>
+        <?php 
+        if(isset($_SESSION['update']))
+        {
+            ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <?php echo $_SESSION['update']; ?>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <?php
+        unset($_SESSION['update']);
+        }
+        ?>
+        <?php 
+        if(isset($_SESSION['delete']))
+        {
+            ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <?php echo $_SESSION['delete']; ?>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <?php
+        unset($_SESSION['delete']);
+        }
+        ?>
+        <?php 
+        if(isset($_SESSION['error']))
+        {
+            ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <?php echo $_SESSION['error']; ?>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <?php
+        unset($_SESSION['error']);
+        }
+        ?>
         <div class="card shadow mb-4">
             <div class="card-body">
                 <div class="table-responsive">
@@ -89,7 +131,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body" id="form_edit">
-                    <form method="post" id="edit_form" action="edit.php">
+                    <form method="post" id="edit_form" action="update.php">
                         <label>Nama Supplier</label>
                         <input type="text" name="nama_supplier" id="nama_supplier" class="form-control" required />
                         <br />
@@ -100,7 +142,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
                         <label>Nomor Handphone</label>
                             <input type="text" name="hp_supplier" id="hp_supplier" class="form-control" />
                             <br />
-                            <input type="submit" name="insert" id="insert" value="Insert" class="btn btn-success" />
+                        <input type="submit" name="insert" id="insert" value="Insert" class="btn btn-success" />
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -116,6 +158,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
     <script src="<?=base_url()?>/assets/DataTables/Buttons-1.7.0/js/dataTables.buttons.min.js"></script>
     <script src="<?=base_url()?>/assets/DataTables/DataTables-1.10.24/js/jquery.dataTables.min.js"></script>
     <script src="<?=base_url()?>/assets/DataTables/DataTables-1.10.24/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://editor.datatables.net/extensions/Editor/js/dataTables.editor.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         $(document).ready(function() {
@@ -130,7 +173,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
                         "orderable" : false,
                         "targets" : 3,
                         "render" : function(data, type, row) {
-                            var btn = "<center><a href=\"edit.php\" \"id='editModal' data-toggle='modal' data-target='#editModal'\"><span class=\"fa fa-edit\"></span></a><a href=\"delete.php?id="+data+"\" onclick=\"return confirm('Yakin Mau dihapus')\"class=\"pl-4\"><i class=\"fa fa-trash\"></i></a></center>";
+                            var btn = "<center><a href=\"edit.php?id="+data+"\"><span class=\"fa fa-edit\"></span></a><a href=\"delete.php?id="+data+"\" onclick=\"return confirm('Yakin Mau dihapus')\"class=\"pl-4\"><i class=\"fa fa-trash\"></i></a></center>";
                             return btn;
                         }
                     }
@@ -142,15 +185,20 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
     <script>
     $(document).ready(function(){
         // edit
-        $(document).on('click', '#editModal', function(){
-        var id = $(this).attr("id");
+        $(document).on('click', '.editModal' function(){
+        var supplier_id = $(this).attr("id");
         $.ajax({
-        url:"edit.php",
-        method:"POST",
-        data:{id:id},
-        success:function(data){
-            $('#form_edit').html(data);
-            $('#editModal').modal('show');
+            url:"update.php",
+            method:"POST",
+            data:{supplier_id:supplier_id},
+            dataType: "json",
+            success:function(data){
+                $('#nama_supplier').val(data.nama_supplier);
+                $('#alamat_supplier').val(data.alamat_supplier);
+                $('#hp_supplier').val(data.hp_supplier);
+                $('#id_supplier').val(data.id_supplier);
+                $('#insert').val("Update");
+                $('#editModal').modal('show');
         }
         });
         });
@@ -165,9 +213,10 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
         </script>
     <!-- jangan lupa untuk menambahkan unset agar sweet alert tidak muncul lagi saat di refresh -->
     <?php unset($_SESSION['sukses']); } ?>
-    <?php }else { ?>
-        <script>window.location="../dashboard.php"</script>
-        <?php } ?>
+    
+<?php }else { ?>
+    <script>window.location="../dashboard.php"</script>
+<?php } ?>
 </html>
 <?php }else{
 	header("Location: ../index.php");

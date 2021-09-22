@@ -27,6 +27,34 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
                 <button type="button" name="age" id="age" data-toggle="modal" data-target="#add_data_Modal" class="btn btn-primary"><i class="fa fa-plus"> Tambah Pegawai</i></button>
             </div>
         </div>
+        <?php 
+            if(isset($_SESSION['update']))
+            {
+                ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <?php echo $_SESSION['update']; ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <?php
+            unset($_SESSION['update']);
+            }
+        ?>
+        <?php 
+            if(isset($_SESSION['delete']))
+            {
+                ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <?php echo $_SESSION['delete']; ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <?php
+            unset($_SESSION['delete']);
+            }
+        ?>
             <div class="card shadow mb-4">
                     <div class="card-body">
                         <div class="table-responsive">
@@ -144,7 +172,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
                         "orderable" : false,
                         "targets" : 8,
                         "render" : function(data, type, row) {
-                            var btn = "<center><a href=\"edit.php\" id='editModal' data-toggle='modal' data-target='#editModal'><span class=\"fa fa-edit\"></span></a><a href=\"delete.php?id="+data+"\" onclick=\"return confirm('Yakin Mau dihapus')\"class=\"\"><i class=\"fa fa-trash\"></i></a></center>";
+                            var btn = "<center><a href=\"edit.php?id="+data+"\"><span class=\"fa fa-edit\"></span></a><a href=\"delete.php?id="+data+"\" onclick=\"return confirm('Yakin Mau dihapus')\"class=\"\"><i class=\"fa fa-trash\"></i></a></center>";
                             return btn;
                         }
                     }

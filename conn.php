@@ -1,8 +1,8 @@
 <?php
 $sql_details = array(
-    'user' => 'root',
-    'pass' => '',
-    'db'   => 'kanas',
+    'user' => 'id17427729_kanas',
+    'pass' => 'dW/Ff7RS7%-@1Hfh',
+    'db'   => 'id17427729_kanaskitchen',
     'host' => 'localhost'
 );
 

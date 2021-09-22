@@ -29,11 +29,8 @@ $primaryKey = 'id_resep';
 // parameter represents the DataTables column identifier. In this case simple
 // indexes
 $columns = array(
-    array( 'db' => 'kode_resep', 'dt' => 0 ),
-    array( 'db' => 'nama_resep',  'dt' => 1 ),
-    array( 'db' => 'total',   'dt' => 2 ),
-    array( 'db' => 'waktu',     'dt' => 3 ),
-    array( 'db' => 'id_resep',     'dt' => 4 ),
+    array( 'db' => 'nama_resep',  'dt' => 0 ),
+    array( 'db' => 'id_resep',     'dt' => 1 ),
     // array(
     //     'db'        => 'start_date',
     //     'dt'        => 4,

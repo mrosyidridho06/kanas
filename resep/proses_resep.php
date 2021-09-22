@@ -1,8 +1,11 @@
-<!--  -->
 <?php
 include "../config.php";
-session_start();
-
+if(!isset($_SESSION)){
+    session_start();
+}
+if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
+<?php if ($_SESSION['role'] == 'user' || $_SESSION['role'] == 'pemilik'){?>
+<?php
 if(isset($_POST["bahan"]))
 {
     $idbahan = $_POST['bahan'];
@@ -41,6 +44,11 @@ if(isset($_POST["bahan"]))
         );
 		$_SESSION["cart"][0] = $item_array;
 	}
-    
-    header('Location: resep.php');
-}
+    header('location: resep.php');
+}?>
+<?php }else { ?>
+        <script>window.location="../dashboard.php"</script>
+<?php } ?>
+<?php }else{
+	header("Location: ../index.php");
+} ?>

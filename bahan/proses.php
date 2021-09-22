@@ -1,6 +1,5 @@
- <?php
-//insert.php
-require_once "../config.php";
+<?php
+include "../config.php";
 date_default_timezone_set('Asia/Makassar');
 if(!empty($_POST))
 {
@@ -12,7 +11,7 @@ if(!empty($_POST))
     $date = date("Y-m-d H:i:s");
     $query = "
     INSERT INTO tb_bahan(nama_barang, jumlah_barang, satuan, harga_barang, waktu, id_supplier)  
-    VALUES('$name', '$jumlah', '$satuan', $harga, $date, $supp)";
+    VALUES('$name', '$jumlah', '$satuan', '$harga', '$date', '$supp')";
     $sql = mysqli_query($conn, $query)or die (mysqli_error($conn));
     if( $sql ) {
         // kalau berhasil alihkan ke halaman list-siswa.php

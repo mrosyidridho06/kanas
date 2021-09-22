@@ -116,7 +116,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
     <div class="modal-dialog">
     <div class="modal-content">
     <div class="modal-header">
-        <h4 class="modal-title">Input Gaji</h4>
+        <h4 class="modal-title">Input Kehadiran</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
     </div>
     <div class="modal-body">

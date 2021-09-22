@@ -1,9 +1,11 @@
 <?php
-	include "../config.php";
- 
-
-	session_start();
-
+include "../config.php";
+if(!isset($_SESSION)){
+    session_start();
+}
+if (isset($_SESSION['username']) && isset($_SESSION['id'])) {   ?>
+<?php if ($_SESSION['role'] == 'user' || $_SESSION['role'] == 'pemilik'){?>
+<?php
 	$idh = $_GET["id"];
  
 	// query sql
@@ -20,3 +22,9 @@
 
 	mysqli_close($conn);
 ?>
+<?php }else { ?>
+    <script>window.location="../dashboard.php"</script>
+<?php } ?>
+<?php }else{
+	header("Location: ../index.php");
+} ?>
